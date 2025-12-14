@@ -8,7 +8,7 @@ const xCommunity = "https://x.com/i/communities/1999923220523450384"
 const bonkUrl = "https://bonk.fun/token/HpBW3bnSQx9ywe8ZbPQtgeFxPoxFPXBNwy9rNXRLbonk"
 
 const aboutCopy = {
-  title: "From the Desk of the Meme House",
+  title: "From the Desk of the $WHITEHOUSE",
   body: [
     "WHITEHOUSE exists for people who believe culture moves markets, and that memes are no longer background noise. They ARE the culture. On Solana, speed matters, visibility matters, and showing up in public matters. This office was formed to represent that reality, not dress it up.",
     "We operate as the meme wing of Solana. The timeline is our briefing room, the replies are our town hall, and every post is an announcement made in full view. There are no closed doors here. What resonates travels. What doesn't gets left behind. That is how culture has always worked.",
