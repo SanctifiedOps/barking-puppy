@@ -972,6 +972,16 @@ main > section {
   line-height: 1.5;
 }
 
+@media (max-width: 640px) {
+  .site-footer {
+    padding: 28px 16px 36px;
+  }
+
+  .foot-note {
+    padding: 0 8px;
+  }
+}
+
 @keyframes floaty {
   0% {
     transform: translateY(0px);
