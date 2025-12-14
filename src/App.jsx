@@ -99,6 +99,7 @@ export default function App() {
   const [paused, setPaused] = React.useState(false)
   const [selectedMedia, setSelectedMedia] = React.useState(null)
   const mediaTrackRef = React.useRef(null)
+  const [menuOpen, setMenuOpen] = React.useState(false)
 
   React.useEffect(() => {
     const targets = document.querySelectorAll("[data-animate]")
@@ -131,10 +132,18 @@ export default function App() {
     const handleEsc = (e) => {
       if (e.key === "Escape") {
         setSelectedMedia(null)
+        setMenuOpen(false)
       }
     }
+    const handleResize = () => {
+      if (window.innerWidth > 900) setMenuOpen(false)
+    }
     window.addEventListener("keydown", handleEsc)
-    return () => window.removeEventListener("keydown", handleEsc)
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("keydown", handleEsc)
+      window.removeEventListener("resize", handleResize)
+    }
   }, [])
 
   const handleCopy = async () => {
@@ -179,19 +188,39 @@ export default function App() {
             <p className="brand-name">{ticker}</p>
           </div>
         </div>
-        <nav className="nav">
-          <a href="#hero">About</a>
-          <a href="#mission">Mission</a>
-          <a href="#media">Media</a>
-          <a href="#links">Links</a>
-        </nav>
-        <div className="cta-row">
-          <button className="chip ghost" onClick={handleCopy}>
-            {copied ? "Copied" : "Copy CA"}
-          </button>
-          <a className="chip primary" href={bonkUrl} target="_blank" rel="noreferrer">
-            Buy {ticker}
-          </a>
+        <button
+          className={`menu-toggle ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen((s) => !s)}
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <div className={`nav-drawer ${menuOpen ? "open" : ""}`}>
+          <nav className="nav">
+            <a href="#hero" onClick={() => setMenuOpen(false)}>
+              About
+            </a>
+            <a href="#mission" onClick={() => setMenuOpen(false)}>
+              Mission
+            </a>
+            <a href="#media" onClick={() => setMenuOpen(false)}>
+              Media
+            </a>
+            <a href="#links" onClick={() => setMenuOpen(false)}>
+              Links
+            </a>
+          </nav>
+          <div className="cta-row">
+            <button className="chip ghost" onClick={handleCopy}>
+              {copied ? "Copied" : "Copy CA"}
+            </button>
+            <a className="chip primary" href={bonkUrl} target="_blank" rel="noreferrer">
+              Buy {ticker}
+            </a>
+          </div>
         </div>
       </header>
 
