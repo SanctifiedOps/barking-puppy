@@ -1,16 +1,25 @@
-# React + Vite
+# $WHITEHOUSE - Meme Office Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Premium red-white-blue memecoin site inspired by iOS-style motion. Built with React + Vite, featuring glassmorphism, hover transitions, and hero space for the Whitehouse meme art.
 
-Currently, two official plugins are available:
+## Quick start
+- Install dependencies: `npm install`
+- Run dev server: `npm run dev`
+- Production build: `npm run build`
+- Preview build: `npm run preview`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key files
+- `src/App.jsx` - layout, memecoin copy, CTAs, and data for tiles/timeline.
+- `src/index.css` - theme variables, gradients, glass panels, animations, and responsive tweaks.
+- `public/wh-crest.svg` & `public/wh-fav.svg` - crest and favicon.
+- `public/wh-meme.svg` - placeholder art for the hero; replace with your meme asset.
 
-## React Compiler
+## Customizing
+- Contract address: edit `contractAddress` in `src/App.jsx`.
+- Links/CTAs: update the `links` array and hero buttons in `src/App.jsx`.
+- Colors/feel: adjust `:root` variables and gradients in `src/index.css`.
+- Imagery: replace `public/wh-meme.svg` with your preferred meme art; keep the aspect ratio for best results (or drop a PNG with the same name).
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Deployment
+- Build output lives in `dist/` after `npm run build`.
+- Host the `dist` folder on your platform of choice (GitHub Pages, Netlify, Vercel, etc.). Netlify users: keep your publish directory pointed at `dist`.

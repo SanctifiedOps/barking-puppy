@@ -1,7 +1,8 @@
 {
-  "name": "ff-site",
+  "name": "wh-site",
   "private": true,
   "version": "0.0.0",
+  "description": "A site copied and rebranded from a template",
   "type": "module",
   "scripts": {
     "dev": "vite",
