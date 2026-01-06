@@ -1,21 +1,19 @@
-import React from "react"
+﻿import React from "react"
 
-const contractAddress = "HpBW3bnSQx9ywe8ZbPQtgeFxPoxFPXBNwy9rNXRLbonk"
-const ticker = "$WHITEHOUSE"
-const mainX = "https://x.com/whitehouseusd1"
-const xCommunity = "https://x.com/i/communities/1999923220523450384"
-
-const bonkUrl = "https://bonk.fun/token/HpBW3bnSQx9ywe8ZbPQtgeFxPoxFPXBNwy9rNXRLbonk"
+const contractAddress = "TBA"
+const ticker = "$UNDISPUTED"
+const mainX = "#"
+const xCommunity = "#"
+const launchUrl = "#buy"
 
 const aboutCopy = {
-  title: "From the Desk of the $WHITEHOUSE",
+  title: "The Undisputed Narrative",
   body: [
-    "WHITEHOUSE exists for people who believe culture moves markets, and that memes are no longer background noise. They ARE the culture. On Solana, speed matters, visibility matters, and showing up in public matters. This office was formed to represent that reality, not dress it up.",
-    "We operate as the meme wing of Solana. The timeline is our briefing room, the replies are our town hall, and every post is an announcement made in full view. There are no closed doors here. What resonates travels. What doesn't gets left behind. That is how culture has always worked.",
-    "This is not about being early, and it is not about being promised anything. It is about participation. Holding $WHITEHOUSE means you're part of the room when it happens. You're watching it form, reacting in real time, and pushing it forward with the rest of the country.",
-    "Every holder is part of the cabinet, whether they planned to be or not. Executive orders take the shape of memes. Policy is set by attention. Momentum is built collectively, on-chain, with receipts. We're here to laugh, to move fast, and to remind everyone that this space belongs to the people who show up.",
-    "This isn't chaos. It's coordination, Solana-style. Public, unapologetic, and moving forward together.",
-    "In memes we trust."
+    "Undisputed Coin (" + ticker + ") is a meme coin built on the idea that America is becoming the undisputed leader in digital assets. The eagle mascot stands for champions, pioneers, and a country that refuses to play second.",
+    "The story connects the rise of WLFI and USD1 with the meme velocity of Bonk, capturing a moment where culture and capital move together.",
+    "Donald Trump statement: \"The Senate just passed an incredible Bill that is going to make America the UNDISPUTED Leader in Digital Assets - Nobody will do it better, it is pure GENIUS! Digital Assets are the future, and our Nation is going to own it... Get it to my desk, ASAP - NO DELAYS, NO ADD ONS.\"",
+    "We are launching on USD1 and rallying a community that believes in the American dream, financial freedom, and on-chain coordination.",
+    "No closed doors, no back rooms. Just a loud, public mission to be undisputed."
   ]
 }
 
@@ -33,11 +31,11 @@ const mediaItems = (() => {
   const entries = Object.entries(mediaGlob).map(([path, src]) => {
     const match = path.match(/whart\s*\((\d+)\)/i)
     const index = match ? Number(match[1]) : 999
-    return { src, index, title: `WH Meme ${match ? match[1] : ""}`.trim() }
+    return { src, index, title: `Undisputed Meme ${match ? match[1] : ""}`.trim() }
   })
   if (entries.length === 0) {
     return mediaPalette.map((p, idx) => ({
-      title: ["Oval Office Energy", "Cabinet Briefing", "Meme Stimulus", "Executive Orders", "Red, White & Brew"][idx] || `Meme ${idx + 1}`,
+      title: ["Eagle Standard", "USD1 Launch", "WLFI Signal", "Undisputed Champions", "Digital Asset Frontier"][idx] || `Meme ${idx + 1}`,
       color: p.color,
       accent: p.accent
     }))
@@ -45,7 +43,7 @@ const mediaItems = (() => {
   return entries
     .sort((a, b) => a.index - b.index)
     .map((entry, idx) => ({
-      title: entry.title || `WH Meme ${idx + 1}`,
+      title: entry.title || `Undisputed Meme ${idx + 1}`,
       color: mediaPalette[idx % mediaPalette.length].color,
       accent: mediaPalette[idx % mediaPalette.length].accent,
       src: entry.src
@@ -53,44 +51,44 @@ const mediaItems = (() => {
 })()
 
 const linkTiles = [
-  { label: "Buy " + ticker, href: bonkUrl, description: "Swap SOL for the meme office pass", primary: true },
-  { label: "Main X", href: mainX, description: "Official statements and announcements" },
-  { label: "X Community", href: xCommunity, description: "Cabinet chatter and open coordination" }
+  { label: "Launch on USD1", href: launchUrl, description: "Launch route and swap details", primary: true },
+  { label: "Main X (TBA)", href: mainX, description: "Official announcements and statements" },
+  { label: "Community (TBA)", href: xCommunity, description: "Champions, pioneers, and coordination" }
 ]
 
 const missionPillars = [
   {
-    title: "Inform",
+    title: "Champion",
     body:
-      "We publish in public, share receipts, and keep the country updated on what matters on Solana."
+      "Carry the eagle signal and back the call for America to lead digital assets."
   },
   {
-    title: "Inspire",
+    title: "Pioneer",
     body:
-      "Turn memes into motion. We celebrate the wins, remix the culture, and show how fast things move when everyone sees the mission."
+      "Push WLFI and USD1 momentum, move fast, and keep the narrative on-chain."
   },
   {
-    title: "Lead",
+    title: "Freedom",
     body:
-      "Set the pace for the timeline. Holders act as the cabinet, steering attention, backing the best ideas, and keeping the meme machine honest."
+      "Build the American dream of financial freedom with a community-first meme economy."
   }
 ]
 
 const buySteps = [
   {
     step: "Step 1",
-    title: "Fund your wallet",
-    body: "Load up a Solana wallet (Phantom, Solflare, or your pick) so you're ready to move when the briefing drops."
+    title: "Set up your wallet",
+    body: "Get a wallet ready and follow official channels so you can move the moment the launch opens."
   },
   {
     step: "Step 2",
-    title: "Paste the $WHITEHOUSE contract",
-    body: "Use your preferred DEX or aggregator, paste the official address, and confirm the ticker and art match the Whitehouse brand."
+    title: "Prepare USD1",
+    body: "Acquire USD1 and double-check the official contract address once it is announced."
   },
   {
     step: "Step 3",
-    title: "Join the country",
-    body: "Complete the swap, secure your keys, and plug into the cabinet. Show up on the timeline and help steer the story."
+    title: "Swap for " + ticker,
+    body: "Use the official USD1 route at launch, secure your keys, and join the champions."
   }
 ]
 
@@ -172,7 +170,7 @@ export default function App() {
   const downloadMedia = () => {
     if (!selectedMedia) return
     const link = document.createElement("a")
-    link.download = `${selectedMedia.title.replace(/\s+/g, "-") || "whitehouse-media"}.png`
+    link.download = `${selectedMedia.title.replace(/\s+/g, "-") || "undisputed-media"}.png`
     link.href = selectedMedia.src || ""
     link.click()
   }
@@ -182,9 +180,9 @@ export default function App() {
       <div className="ribbon" aria-hidden="true" />
       <header className="site-header">
         <div className="brand">
-          <img src="/wh-meme.svg" alt="Whitehouse meme mark" className="brand-mark" />
+          <img src="/wh-meme.svg" alt="Undisputed coin mark" className="brand-mark" />
           <div>
-            <p className="brand-kicker">Meme Office</p>
+            <p className="brand-kicker">Undisputed Coin</p>
             <p className="brand-name">{ticker}</p>
           </div>
         </div>
@@ -206,6 +204,9 @@ export default function App() {
             <a href="#mission" onClick={() => setMenuOpen(false)}>
               Mission
             </a>
+            <a href="#buy" onClick={() => setMenuOpen(false)}>
+              Buy
+            </a>
             <a href="#media" onClick={() => setMenuOpen(false)}>
               Media
             </a>
@@ -217,8 +218,8 @@ export default function App() {
             <button className="chip ghost" onClick={handleCopy}>
               {copied ? "Copied" : "Copy CA"}
             </button>
-            <a className="chip primary" href={bonkUrl} target="_blank" rel="noreferrer">
-              Buy {ticker}
+            <a className="chip primary" href={launchUrl}>
+              Launch on USD1
             </a>
           </div>
         </div>
@@ -229,30 +230,30 @@ export default function App() {
           <div className="hero-card">
             <div className="hero-left">
               <div className="pill-row">
-                <span className="pill filled">Solana Native</span>
-                <span className="pill outline">Community Owned</span>
+                <span className="pill filled">USD1 Launch</span>
+                <span className="pill outline">Eagle Mascot</span>
               </div>
-              <h1>This is an Official {ticker} Communication</h1>
+              <h1>Undisputed Coin ({ticker})</h1>
               <p className="lede">
-                We treat the timeline like a briefing room, release statements as memes, and let the public decide what
-                carries weight.
+                The Leader In Digital Assets. Built for champions, pioneers, and believers in the American dream of
+                financial freedom.
               </p>
               <div className="hero-actions">
-                <a className="button primary" href={bonkUrl} target="_blank" rel="noreferrer">
-                  Buy {ticker}
+                <a className="button primary" href={launchUrl}>
+                  Launch on USD1
                 </a>
-                <a className="button ghost" href={xCommunity} target="_blank" rel="noreferrer">
-                  X Community
+                <a className="button ghost" href="#about">
+                  Read the narrative
                 </a>
-                <a className="button ghost" href={mainX} target="_blank" rel="noreferrer">
-                  Main X
+                <a className="button ghost" href="#mission">
+                  Mission
                 </a>
               </div>
-              <p className="micro">In memes we trust.</p>
+              <p className="micro">The Leader In Digital Assets.</p>
             </div>
             <div className="hero-right">
               <div className="hero-art">
-                <img src="/wh-meme.svg" alt="Whitehouse meme art" className="hero-img" />
+                <img src="/wh-meme.svg" alt="Undisputed eagle art" className="hero-img" />
               </div>
             </div>
           </div>
@@ -270,10 +271,9 @@ export default function App() {
 
         <section className="mission-section" id="mission">
           <div className="section-tag">Mission</div>
-          <h2>Inform, inspire, and lead the country.</h2>
+          <h2>Champions, pioneers, freedom.</h2>
           <p className="section-lede">
-            WHITEHOUSE shows up in public. Briefings happen on the timeline, energy is earned together, and every holder
-            helps steer the story.
+            Undisputed Coin backs the narrative that America leads digital assets, and the community makes it visible.
           </p>
           <div className="mission-grid">
             {missionPillars.map((pillar) => (
@@ -287,27 +287,27 @@ export default function App() {
 
         <section className="media-section" id="media">
           <div className="section-tag">Media</div>
-          <h2>Moments from the movement</h2>
-          <p className="section-lede">A rolling gallery straight from the internet West Wing. Pause for the briefing or let it cruise.</p>
+          <h2>Eagle standard gallery</h2>
+          <p className="section-lede">Shareable art for the champions. Pause for the moment or let it cruise.</p>
           <div className="media-controls">
             <button className="circle-btn" onClick={() => handleMediaScroll("prev")} aria-label="Previous media">
-              ←
+              {"<"}
             </button>
             <button className="circle-btn" onClick={() => setPaused((s) => !s)} aria-label="Toggle motion">
-              {paused ? "▶" : "⏸"}
+              {paused ? "||" : ">"}
             </button>
             <button className="circle-btn" onClick={() => handleMediaScroll("next")} aria-label="Next media">
-              →
+              {">"}
             </button>
           </div>
           <div className={`media-track ${paused ? "paused" : ""}`} ref={mediaTrackRef}>
             {mediaItems.map((item, idx) => (
               <button
-                key={`${item.title || "wh-meme"}-${idx}`}
+                key={`${item.title || "undisputed-meme"}-${idx}`}
                 className="media-card"
                 style={{ background: `linear-gradient(145deg, ${item.color}, ${item.accent})` }}
                 onClick={() => openMedia(item)}
-                aria-label={`Open ${item.title || "Whitehouse meme"}`}
+                aria-label={`Open ${item.title || "Undisputed meme"}`}
               >
                 {item.src && <img src={item.src} alt={item.title} className="media-img" />}
                 <div className="media-overlay" />
@@ -318,9 +318,9 @@ export default function App() {
 
         <section className="buy-section" id="buy">
           <div className="section-tag">Buy</div>
-          <h2>Three steps to join the administration</h2>
+          <h2>Three steps to join the champions</h2>
           <p className="section-lede">
-            Always double-check contract addresses and only move what you can afford to risk. Keep receipts, stay public.
+            Always double-check official links and contract addresses. Move only what you can afford to risk.
           </p>
           <div className="buy-grid">
             {buySteps.map((step, idx) => (
@@ -329,8 +329,8 @@ export default function App() {
                 <p className="step-title">{step.title}</p>
                 <p className="step-body">{step.body}</p>
                 {idx === 0 && (
-                  <a className="button primary step-action" href={bonkUrl} target="_blank" rel="noreferrer">
-                    Buy on Bonk.fun
+                  <a className="button primary step-action" href={launchUrl}>
+                    Launch on USD1
                   </a>
                 )}
                 {idx === 1 && (
@@ -339,8 +339,8 @@ export default function App() {
                   </button>
                 )}
                 {idx === 2 && (
-                  <a className="button primary step-action" href={xCommunity} target="_blank" rel="noreferrer">
-                    Join the administration
+                  <a className="button primary step-action" href="#links">
+                    Join the champions
                   </a>
                 )}
               </div>
@@ -350,7 +350,7 @@ export default function App() {
 
         <section className="links-section" id="links">
           <div className="section-tag">Links</div>
-          <h2>Secure your seat in the West Wing</h2>
+          <h2>Official channels</h2>
           <p className="section-lede">Official links only. Bookmark and ignore impostors.</p>
           <div className="link-tiles">
             {linkTiles.map((link) => (
@@ -371,13 +371,14 @@ export default function App() {
       </main>
 
       <footer className="site-footer" id="footer">
-        <p className="foot-year">(c) {new Date().getFullYear()} Whitehouse Meme Office</p>
+        <p className="foot-year">(c) {new Date().getFullYear()} Undisputed Coin</p>
         <p className="foot-note">
-          WHITEHOUSE is a community-driven meme project on Solana. Holders coordinate in public and move fast together.
+          Undisputed Coin is a community-driven meme project aligned with the USD1 narrative and the call for America to
+          lead digital assets.
         </p>
         <p className="foot-note">
-          Nothing here is financial advice. Verify contract addresses ({contractAddress}), stay skeptical, and never
-          risk more than you can lose.
+          Nothing here is financial advice. Verify contract addresses ({contractAddress}), stay skeptical, and never risk
+          more than you can lose.
         </p>
       </footer>
 
