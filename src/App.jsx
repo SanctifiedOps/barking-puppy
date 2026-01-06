@@ -19,11 +19,11 @@ const aboutCopy = {
 }
 
 const mediaPalette = [
-  { color: "#0b2f6f", accent: "#f0383f" },
-  { color: "#0d2147", accent: "#3a6edc" },
-  { color: "#102c5e", accent: "#f86c73" },
-  { color: "#081224", accent: "#2c63cf" },
-  { color: "#0e1c3f", accent: "#ff6b74" }
+  { color: "#0b2f6f", accent: "#d6a347" },
+  { color: "#0d2147", accent: "#e1b35a" },
+  { color: "#102c5e", accent: "#f0c36a" },
+  { color: "#081224", accent: "#cfa047" },
+  { color: "#0e1c3f", accent: "#f2c97c" }
 ]
 
 const mediaGlob = import.meta.glob("../public/whart*.png", { eager: true, as: "url" })

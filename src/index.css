@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital,wght@0,400;1,400&family=Public+Sans:wght@300;400;500;600;700;800&display=swap");
+﻿@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital,wght@0,400;1,400&family=Public+Sans:wght@300;400;500;600;700;800&display=swap");
 
 :root {
   --bg: #06090f;
@@ -6,8 +6,8 @@
   --glass: rgba(16, 24, 44, 0.65);
   --white: #f6f8fb;
   --muted: #a9b7d0;
-  --red: #f0383f;
-  --red-soft: #ff6b74;
+  --red: #d6a347;
+  --red-soft: #f0c36a;
   --blue: #0b2f6f;
   --blue-soft: #3a6edc;
   --border: rgba(255, 255, 255, 0.08);
@@ -82,7 +82,7 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(120% 80% at 15% 10%, rgba(240, 56, 63, 0.12), transparent 60%),
+    radial-gradient(120% 80% at 15% 10%, rgba(214, 163, 71, 0.12), transparent 60%),
     radial-gradient(120% 80% at 85% 10%, rgba(35, 102, 210, 0.12), transparent 55%),
     radial-gradient(70% 60% at 50% 80%, rgba(6, 12, 24, 0.8), #05080f);
   background-repeat: no-repeat;
@@ -98,10 +98,10 @@ body::after {
   inset: 0;
   background-image:
     radial-gradient(150px 150px at 15% 25%, rgba(255, 255, 255, 0.08), transparent 60%),
-    radial-gradient(180px 180px at 75% 20%, rgba(240, 56, 63, 0.08), transparent 60%),
+    radial-gradient(180px 180px at 75% 20%, rgba(214, 163, 71, 0.08), transparent 60%),
     radial-gradient(200px 200px at 50% 75%, rgba(58, 110, 220, 0.08), transparent 60%),
     radial-gradient(10px 10px at 30% 40%, rgba(255, 255, 255, 0.24), transparent 70%),
-    radial-gradient(12px 12px at 70% 65%, rgba(240, 56, 63, 0.2), transparent 70%),
+    radial-gradient(12px 12px at 70% 65%, rgba(214, 163, 71, 0.2), transparent 70%),
     radial-gradient(9px 9px at 55% 20%, rgba(58, 110, 220, 0.2), transparent 70%);
   background-repeat: no-repeat;
   mix-blend-mode: screen;
@@ -174,7 +174,7 @@ main > section {
   height: 12px;
   background: repeating-linear-gradient(
     90deg,
-    #f0383f 0 20px,
+    #d6a347 0 20px,
     #ffffff 20px 40px,
     #0b2f6f 40px 60px
   );
@@ -310,7 +310,7 @@ main > section {
 .chip.primary {
   background: linear-gradient(120deg, var(--red), var(--red-soft));
   border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 10px 26px rgba(240, 56, 63, 0.45);
+  box-shadow: 0 10px 26px rgba(214, 163, 71, 0.45);
   animation: softPulse 4s ease-in-out infinite alternate;
 }
 
@@ -347,7 +347,7 @@ main > section {
   content: "";
   position: absolute;
   inset: -40px -20px;
-  background: radial-gradient(70% 70% at 30% 40%, rgba(240, 56, 63, 0.12), transparent 60%),
+  background: radial-gradient(70% 70% at 30% 40%, rgba(214, 163, 71, 0.12), transparent 60%),
     radial-gradient(60% 60% at 70% 50%, rgba(58, 110, 220, 0.12), transparent 60%);
   filter: blur(8px);
   z-index: 0;
@@ -430,7 +430,7 @@ main > section {
 
 .button.primary {
   background: linear-gradient(120deg, var(--red), var(--red-soft));
-  box-shadow: 0 12px 30px rgba(240, 56, 63, 0.4);
+  box-shadow: 0 12px 30px rgba(214, 163, 71, 0.4);
   animation: softPulse 4.5s ease-in-out infinite alternate;
 }
 
@@ -634,7 +634,7 @@ main > section {
 }
 
 .section-tag::before {
-  content: "•";
+  content: "â€¢";
   font-weight: 900;
   color: var(--white);
 }
@@ -995,7 +995,7 @@ main > section {
   grid-template-columns: 1fr auto;
   grid-template-rows: auto auto;
   gap: 6px 10px;
-  background: radial-gradient(circle at 20% 20%, rgba(240, 56, 63, 0.22), rgba(11, 47, 111, 0.6));
+  background: radial-gradient(circle at 20% 20%, rgba(214, 163, 71, 0.22), rgba(11, 47, 111, 0.6));
   transition: var(--transition);
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
   background-size: 140% 140%;
@@ -1005,7 +1005,7 @@ main > section {
 }
 
 .link-tile.primary {
-  background: radial-gradient(circle at 20% 20%, rgba(240, 56, 63, 0.22), rgba(11, 47, 111, 0.6));
+  background: radial-gradient(circle at 20% 20%, rgba(214, 163, 71, 0.22), rgba(11, 47, 111, 0.6));
   border-color: rgba(255, 255, 255, 0.18);
 }
 
@@ -1106,11 +1106,11 @@ main > section {
 @keyframes softPulse {
   0% {
     transform: translateY(0);
-    box-shadow: 0 10px 26px rgba(240, 56, 63, 0.2);
+    box-shadow: 0 10px 26px rgba(214, 163, 71, 0.2);
   }
   100% {
     transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 16px 36px rgba(240, 56, 63, 0.36);
+    box-shadow: 0 16px 36px rgba(214, 163, 71, 0.36);
   }
 }
 
@@ -1222,3 +1222,4 @@ main > section {
     border-radius: 12px;
   }
 }
+
