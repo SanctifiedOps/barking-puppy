@@ -703,25 +703,19 @@ main > section {
   overflow: hidden;
   border: 1px solid var(--border);
   background: rgba(2, 6, 14, 0.7);
-  aspect-ratio: 4 / 5;
-  min-height: 320px;
 }
 
-.truth-embed__frame iframe {
+.truth-embed__image {
   width: 100%;
-  height: 100%;
-  border: 0;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
-.truth-embed__quote {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.6;
-  font-size: 0.98rem;
-}
-
-.truth-embed__cta {
-  justify-self: start;
+.truth-embed__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .section-lede {
@@ -1087,7 +1081,11 @@ main > section {
     align-items: flex-start;
   }
 
-  .truth-embed__cta {
+  .truth-embed__actions {
+    width: 100%;
+  }
+
+  .truth-embed__actions .truth-embed__cta {
     width: 100%;
     justify-content: center;
   }

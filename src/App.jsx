@@ -6,15 +6,14 @@ const mainX = "#"
 const xCommunity = "#"
 const launchUrl = "#buy"
 const truthPostUrl = "https://truthsocial.com/@realDonaldTrump/114857957325423668"
-const truthEmbedUrl = `${truthPostUrl}?embed=true`
+const truthProfileUrl = "https://truthsocial.com/@realDonaldTrump"
 
 const aboutCopy = {
   title: "The Undisputed Narrative",
   body: [
-    "Undisputed Coin (" + ticker + ") is a meme coin built on the idea that America is becoming the undisputed leader in digital assets. The eagle mascot stands for champions, pioneers, and a country that refuses to play second.",
+    "Undisputed Coin (" + ticker + ") is a meme coin built on the idea that America is the undisputed leader in digital assets. The eagle mascot stands for champions, pioneers, and a country that refuses to play second.",
     "The story connects the rise of WLFI and USD1 with the meme velocity of Bonk, capturing a moment where culture and capital move together.",
-    "Donald Trump statement: \"The Senate just passed an incredible Bill that is going to make America the UNDISPUTED Leader in Digital Assets - Nobody will do it better, it is pure GENIUS! Digital Assets are the future, and our Nation is going to own it... Get it to my desk, ASAP - NO DELAYS, NO ADD ONS.\"",
-    "We are launching on USD1 and rallying a community that believes in the American dream, financial freedom, and on-chain coordination.",
+    "We launched on USD1 and rally a community that believes in the American dream, financial freedom, and on-chain coordination.",
     "No closed doors, no back rooms. Just a loud, public mission to be undisputed."
   ]
 }
@@ -37,7 +36,7 @@ const mediaItems = (() => {
   })
   if (entries.length === 0) {
     return mediaPalette.map((p, idx) => ({
-      title: ["Eagle Standard", "USD1 Launch", "WLFI Signal", "Undisputed Champions", "Digital Asset Frontier"][idx] || `Meme ${idx + 1}`,
+      title: ["Eagle Standard", "USD1 Live", "WLFI Signal", "Undisputed Champions", "Digital Asset Frontier"][idx] || `Meme ${idx + 1}`,
       color: p.color,
       accent: p.accent
     }))
@@ -53,9 +52,9 @@ const mediaItems = (() => {
 })()
 
 const linkTiles = [
-  { label: "Launch on USD1", href: launchUrl, description: "Launch route and swap details", primary: true },
-  { label: "Main X (TBA)", href: mainX, description: "Official announcements and statements" },
-  { label: "Community (TBA)", href: xCommunity, description: "Champions, pioneers, and coordination" }
+  { label: "Buy on USD1", href: launchUrl, description: "Swap details and routes", primary: true },
+  { label: "Main X", href: mainX, description: "Official announcements and statements" },
+  { label: "Community", href: xCommunity, description: "Champions, pioneers, and coordination" }
 ]
 
 const missionPillars = [
@@ -80,17 +79,17 @@ const buySteps = [
   {
     step: "Step 1",
     title: "Set up your wallet",
-    body: "Get a wallet ready and follow official channels so you can move the moment the launch opens."
+    body: "Get a wallet ready and follow official channels so you can move fast and safely."
   },
   {
     step: "Step 2",
     title: "Prepare USD1",
-    body: "Acquire USD1 and double-check the official contract address once it is announced."
+    body: "Acquire USD1 and double-check the official contract address on every swap."
   },
   {
     step: "Step 3",
     title: "Swap for " + ticker,
-    body: "Use the official USD1 route at launch, secure your keys, and join the champions."
+    body: "Use the official USD1 route, secure your keys, and join the champions."
   }
 ]
 
@@ -182,7 +181,7 @@ export default function App() {
       <div className="ribbon" aria-hidden="true" />
       <header className="site-header">
         <div className="brand">
-          <img src="/wh-meme.svg" alt="Undisputed coin mark" className="brand-mark" />
+          <img src="/UDUSD1%20FAVICON.png" alt="Undisputed coin mark" className="brand-mark" />
           <div>
             <p className="brand-kicker">Undisputed Coin</p>
             <p className="brand-name">{ticker}</p>
@@ -221,7 +220,7 @@ export default function App() {
               {copied ? "Copied" : "Copy CA"}
             </button>
             <a className="chip primary" href={launchUrl}>
-              Launch on USD1
+              Buy on USD1
             </a>
           </div>
         </div>
@@ -232,7 +231,7 @@ export default function App() {
           <div className="hero-card">
             <div className="hero-left">
               <div className="pill-row">
-                <span className="pill filled">USD1 Launch</span>
+                <span className="pill filled">USD1 Live</span>
                 <span className="pill outline">Eagle Mascot</span>
               </div>
               <h1>Undisputed Coin ({ticker})</h1>
@@ -242,7 +241,7 @@ export default function App() {
               </p>
               <div className="hero-actions">
                 <a className="button primary" href={launchUrl}>
-                  Launch on USD1
+                  Buy on USD1
                 </a>
                 <a className="button ghost" href="#about">
                   Read the narrative
@@ -255,7 +254,7 @@ export default function App() {
             </div>
             <div className="hero-right">
               <div className="hero-art">
-                <img src="/wh-meme.svg" alt="Undisputed eagle art" className="hero-img" />
+                <img src="/UCUSD1-EAGLE.png" alt="Undisputed eagle art" className="hero-img" />
               </div>
             </div>
           </div>
@@ -272,21 +271,21 @@ export default function App() {
           <div className="truth-embed">
             <div className="truth-embed__header">
               <span className="truth-embed__label">Truth Social</span>
-              <a className="truth-embed__handle" href={truthPostUrl} target="_blank" rel="noreferrer">
+              <a className="truth-embed__handle" href={truthProfileUrl} target="_blank" rel="noreferrer">
                 @realDonaldTrump
               </a>
             </div>
             <div className="truth-embed__frame">
-              <iframe title="Truth Social post by @realDonaldTrump" src={truthEmbedUrl} loading="lazy" />
+              <img src="/ucusd1-trump.png" alt="Truth Social update screenshot" className="truth-embed__image" />
             </div>
-            <blockquote className="truth-embed__quote">
-              The Senate just passed an incredible Bill that is going to make America the UNDISPUTED Leader in Digital
-              Assets - Nobody will do it better, it is pure GENIUS! Digital Assets are the future, and our Nation is
-              going to own it... Get it to my desk, ASAP - NO DELAYS, NO ADD ONS.
-            </blockquote>
-            <a className="button ghost truth-embed__cta" href={truthPostUrl} target="_blank" rel="noreferrer">
-              View the post on Truth Social
-            </a>
+            <div className="truth-embed__actions">
+              <a className="button ghost truth-embed__cta" href={truthPostUrl} target="_blank" rel="noreferrer">
+                View the post
+              </a>
+              <a className="button ghost truth-embed__cta" href={truthProfileUrl} target="_blank" rel="noreferrer">
+                Visit Trump's page
+              </a>
+            </div>
           </div>
         </section>
 
@@ -351,7 +350,7 @@ export default function App() {
                 <p className="step-body">{step.body}</p>
                 {idx === 0 && (
                   <a className="button primary step-action" href={launchUrl}>
-                    Launch on USD1
+                    Buy on USD1
                   </a>
                 )}
                 {idx === 1 && (
