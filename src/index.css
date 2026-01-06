@@ -655,6 +655,75 @@ main > section {
   line-height: 1.7;
 }
 
+.truth-embed {
+  width: min(820px, 100%);
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(150deg, rgba(11, 47, 111, 0.35), rgba(8, 12, 20, 0.92));
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.42);
+  text-align: left;
+}
+
+.truth-embed__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.truth-embed__label {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.truth-embed__handle {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  transition: var(--transition);
+}
+
+.truth-embed__handle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.truth-embed__frame {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgba(2, 6, 14, 0.7);
+  aspect-ratio: 4 / 5;
+  min-height: 320px;
+}
+
+.truth-embed__frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.truth-embed__quote {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+.truth-embed__cta {
+  justify-self: start;
+}
+
 .section-lede {
   margin: 0;
   color: var(--muted);
@@ -1011,6 +1080,16 @@ main > section {
     padding: 0 12px;
     font-size: 0.95rem;
     text-align: center;
+  }
+
+  .truth-embed__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .truth-embed__cta {
+    width: 100%;
+    justify-content: center;
   }
 }
 

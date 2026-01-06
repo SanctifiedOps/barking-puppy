@@ -5,6 +5,8 @@ const ticker = "$UNDISPUTED"
 const mainX = "#"
 const xCommunity = "#"
 const launchUrl = "#buy"
+const truthPostUrl = "https://truthsocial.com/@realDonaldTrump/114857957325423668"
+const truthEmbedUrl = `${truthPostUrl}?embed=true`
 
 const aboutCopy = {
   title: "The Undisputed Narrative",
@@ -266,6 +268,25 @@ export default function App() {
             {aboutCopy.body.map((p) => (
               <p key={p}>{p}</p>
             ))}
+          </div>
+          <div className="truth-embed">
+            <div className="truth-embed__header">
+              <span className="truth-embed__label">Truth Social</span>
+              <a className="truth-embed__handle" href={truthPostUrl} target="_blank" rel="noreferrer">
+                @realDonaldTrump
+              </a>
+            </div>
+            <div className="truth-embed__frame">
+              <iframe title="Truth Social post by @realDonaldTrump" src={truthEmbedUrl} loading="lazy" />
+            </div>
+            <blockquote className="truth-embed__quote">
+              The Senate just passed an incredible Bill that is going to make America the UNDISPUTED Leader in Digital
+              Assets - Nobody will do it better, it is pure GENIUS! Digital Assets are the future, and our Nation is
+              going to own it... Get it to my desk, ASAP - NO DELAYS, NO ADD ONS.
+            </blockquote>
+            <a className="button ghost truth-embed__cta" href={truthPostUrl} target="_blank" rel="noreferrer">
+              View the post on Truth Social
+            </a>
           </div>
         </section>
 
