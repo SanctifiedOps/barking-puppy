@@ -230,11 +230,7 @@ export default function App() {
         <section className="hero-wrap" id="hero">
           <div className="hero-card">
             <div className="hero-left">
-              <div className="pill-row">
-                <span className="pill filled">USD1 Live</span>
-                <span className="pill outline">Eagle Mascot</span>
-              </div>
-              <h1>Undisputed Coin ({ticker})</h1>
+              <img src="/UCUSD1-Hero.png" alt="Undisputed hero title" className="hero-title-image" />
               <p className="lede">
                 The Leader In Digital Assets. Built for champions, pioneers, and believers in the American dream of
                 financial freedom.
@@ -252,10 +248,8 @@ export default function App() {
               </div>
               <p className="micro">The Leader In Digital Assets.</p>
             </div>
-            <div className="hero-right">
-              <div className="hero-art">
-                <img src="/UCUSD1-EAGLE.png" alt="Undisputed eagle art" className="hero-img" />
-              </div>
+            <div className="hero-art">
+              <img src="/UCUSD1-EAGLE.png" alt="Undisputed eagle art" className="hero-img" />
             </div>
           </div>
         </section>

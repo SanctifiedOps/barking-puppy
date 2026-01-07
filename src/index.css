@@ -344,33 +344,28 @@ main > section {
 }
 
 .hero-wrap::before {
-  content: "";
-  position: absolute;
-  inset: -40px -20px;
-  background: radial-gradient(70% 70% at 30% 40%, rgba(214, 163, 71, 0.12), transparent 60%),
-    radial-gradient(60% 60% at 70% 50%, rgba(58, 110, 220, 0.12), transparent 60%);
-  filter: blur(8px);
-  z-index: 0;
+  content: none;
 }
 
 .hero-card {
   width: min(1100px, 100%);
   padding: 0;
-  display: grid;
-  grid-template-columns: minmax(320px, 1fr) minmax(300px, 420px);
-  gap: 32px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  gap: 28px;
   position: relative;
   z-index: 1;
   transition: transform 260ms ease, box-shadow 260ms ease;
 }
 
-.hero-left h1 {
-  margin: 16px 0 10px 0;
-  font-family: "DM Serif Display", "Times New Roman", serif;
-  font-weight: 400;
-  font-size: clamp(2.4rem, 2vw + 1.9rem, 3.5rem);
-  line-height: 1.05;
+.hero-title-image {
+  width: min(620px, 92%);
+  height: auto;
+  display: block;
+  margin: 0 auto 12px;
+  filter: drop-shadow(0 16px 30px rgba(0, 0, 0, 0.55));
 }
 
 .lede {
@@ -378,6 +373,8 @@ main > section {
   color: var(--muted);
   line-height: 1.6;
   max-width: 640px;
+  text-align: center;
+  margin-inline: auto;
 }
 
 .pill-row {
@@ -411,6 +408,7 @@ main > section {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 12px;
+  justify-content: center;
 }
 
 .button {
@@ -472,10 +470,23 @@ main > section {
   display: flex;
   justify-content: center;
   padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-art::before {
+  content: "";
+  position: absolute;
+  width: min(520px, 80%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214, 163, 71, 0.6), rgba(214, 163, 71, 0.18), transparent 72%);
+  filter: blur(10px);
+  z-index: -1;
 }
 
 .hero-img {
-  width: min(500px, 100%);
+  width: min(520px, 100%);
   display: block;
   filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.35));
   animation: floaty 7s ease-in-out infinite;
