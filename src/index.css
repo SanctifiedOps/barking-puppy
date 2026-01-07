@@ -419,7 +419,7 @@ main > section {
 .stats-marquee {
   display: flex;
   width: max-content;
-  animation: statsMarquee 26s linear infinite;
+  animation: statsMarquee 32s linear infinite;
   will-change: transform;
 }
 
@@ -1652,7 +1652,7 @@ main > section {
   }
 
   .stats-marquee {
-    animation-duration: 34s;
+    animation-duration: 40s;
   }
 }
 

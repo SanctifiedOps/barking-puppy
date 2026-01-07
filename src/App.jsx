@@ -198,9 +198,28 @@ export default function App() {
     let isActive = true
     const fetchStats = async () => {
       try {
-        const response = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${statsTokenAddress}`)
-        if (!response.ok) throw new Error("Failed to load stats")
-        const data = await response.json()
+        const [dexResult, holdersResult] = await Promise.allSettled([
+          fetch(`https://api.dexscreener.com/latest/dex/tokens/${statsTokenAddress}`),
+          fetch(`/api/holders?mint=${statsTokenAddress}`)
+        ])
+
+        let holdersCount = null
+        if (holdersResult.status === "fulfilled" && holdersResult.value.ok) {
+          const holdersData = await holdersResult.value.json()
+          holdersCount = holdersData?.holders ?? null
+        }
+
+        if (dexResult.status !== "fulfilled" || !dexResult.value.ok) {
+          if (!isActive) return
+          setStats((prev) => ({
+            ...prev,
+            holders: holdersCount ?? prev.holders,
+            updatedAt: Date.now()
+          }))
+          return
+        }
+
+        const data = await dexResult.value.json()
         const pairs = Array.isArray(data.pairs) ? data.pairs : []
         const bestPair = pairs.reduce((best, pair) => {
           if (!pair?.liquidity?.usd) return best
@@ -215,7 +234,7 @@ export default function App() {
           fdv: bestPair.fdv || bestPair.marketCap || null,
           volume24h: bestPair.volume?.h24 || null,
           liquidity: bestPair.liquidity?.usd || null,
-          holders: null,
+          holders: holdersCount,
           updatedAt: Date.now()
         })
       } catch (_err) {
@@ -290,6 +309,7 @@ export default function App() {
     { label: "Volume (24h)", value: formatUsd(stats.volume24h, { notation: "compact", maximumFractionDigits: 2 }) },
     { label: "Liquidity", value: formatUsd(stats.liquidity, { notation: "compact", maximumFractionDigits: 2 }) }
   ]
+  const statsRow = [...statsItems, ...statsItems, ...statsItems]
 
   return (
     <div className="page">
@@ -378,16 +398,16 @@ export default function App() {
             <div className="stats-bar">
               <div className="stats-marquee">
                 <div className="stats-track">
-                  {statsItems.map((item) => (
-                    <div key={item.label} className="stats-item">
+                  {statsRow.map((item, index) => (
+                    <div key={`${item.label}-${index}`} className="stats-item">
                       <span className="stats-name">{item.label}</span>
                       <span className="stats-value">{item.value}</span>
                     </div>
                   ))}
                 </div>
                 <div className="stats-track stats-track--clone" aria-hidden="true">
-                  {statsItems.map((item) => (
-                    <div key={`${item.label}-clone`} className="stats-item">
+                  {statsRow.map((item, index) => (
+                    <div key={`${item.label}-clone-${index}`} className="stats-item">
                       <span className="stats-name">{item.label}</span>
                       <span className="stats-value">{item.value}</span>
                     </div>
