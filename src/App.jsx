@@ -7,14 +7,28 @@ const xCommunity = "#"
 const launchUrl = "#buy"
 const truthPostUrl = "https://truthsocial.com/@realDonaldTrump/114857957325423668"
 const truthProfileUrl = "https://truthsocial.com/@realDonaldTrump"
+const statsTokenAddress = "GMvCfcZg8YvkkQmwDaAzCtHDrrEtgE74nQpQ7xNabonk"
 
 const aboutCopy = {
   title: "The Undisputed Narrative",
   body: [
-    "Undisputed Coin (" + ticker + ") is a meme coin built on the idea that America is the undisputed leader in digital assets. The eagle mascot stands for champions, pioneers, and a country that refuses to play second.",
-    "The story connects the rise of WLFI and USD1 with the meme velocity of Bonk, capturing a moment where culture and capital move together.",
-    "We launched on USD1 and rally a community that believes in the American dream, financial freedom, and on-chain coordination.",
-    "No closed doors, no back rooms. Just a loud, public mission to be undisputed."
+    {
+      lead: "Undisputed Coin",
+      text:
+        "(" +
+        ticker +
+        ") is a meme coin built on the belief that America is the undisputed leader in digital assets. The eagle mascot stands for champions and pioneers who refuse to play second."
+    },
+    {
+      lead: "Narrative",
+      text:
+        "WLFI and USD1 momentum collides with the meme velocity of Bonk, capturing a moment where culture and capital move together on-chain."
+    },
+    {
+      lead: "Community",
+      text:
+        "Launched on USD1 and powered by holders who believe in the American dream of financial freedom, coordination, and bold public momentum."
+    }
   ]
 }
 
@@ -93,12 +107,47 @@ const buySteps = [
   }
 ]
 
+const roadmapSteps = [
+  {
+    phase: "Phase 1",
+    title: "Launch and community build",
+    body:
+      "We went live on USD1 and rallied the first wave of champions. The goal is visibility, momentum, and a daily flow of memes that keep the story front and center."
+  },
+  {
+    phase: "Phase 2",
+    title: "Reinvest into the brand",
+    body:
+      "Creator fees go back into sharper art, cinematic video drops, giveaways, and community airdrops that reward the loudest supporters."
+  },
+  {
+    phase: "Phase 3",
+    title: "Allied partnerships",
+    body:
+      "We team with WLFI and USD1 aligned creators, brands, and communities. Expect competitions, collabs, and virtual events that push reach and hype."
+  },
+  {
+    phase: "Phase 4",
+    title: "Undisputed expansion",
+    body:
+      "Community led initiatives, charitable donations, listing explorations, and the Undisputed commemorative challenge coin giveaway."
+  }
+]
+
 export default function App() {
   const [copied, setCopied] = React.useState(false)
   const [paused, setPaused] = React.useState(false)
   const [selectedMedia, setSelectedMedia] = React.useState(null)
   const mediaTrackRef = React.useRef(null)
   const [menuOpen, setMenuOpen] = React.useState(false)
+  const [stats, setStats] = React.useState({
+    price: null,
+    fdv: null,
+    volume24h: null,
+    liquidity: null,
+    holders: null,
+    updatedAt: null
+  })
 
   React.useEffect(() => {
     const targets = document.querySelectorAll("[data-animate]")
@@ -145,6 +194,44 @@ export default function App() {
     }
   }, [])
 
+  React.useEffect(() => {
+    let isActive = true
+    const fetchStats = async () => {
+      try {
+        const response = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${statsTokenAddress}`)
+        if (!response.ok) throw new Error("Failed to load stats")
+        const data = await response.json()
+        const pairs = Array.isArray(data.pairs) ? data.pairs : []
+        const bestPair = pairs.reduce((best, pair) => {
+          if (!pair?.liquidity?.usd) return best
+          if (!best) return pair
+          return pair.liquidity.usd > best.liquidity.usd ? pair : best
+        }, null)
+
+        if (!bestPair || !isActive) return
+
+        setStats({
+          price: Number(bestPair.priceUsd) || null,
+          fdv: bestPair.fdv || bestPair.marketCap || null,
+          volume24h: bestPair.volume?.h24 || null,
+          liquidity: bestPair.liquidity?.usd || null,
+          holders: null,
+          updatedAt: Date.now()
+        })
+      } catch (_err) {
+        if (!isActive) return
+        setStats((prev) => ({ ...prev, updatedAt: Date.now() }))
+      }
+    }
+
+    fetchStats()
+    const intervalId = window.setInterval(fetchStats, 30000)
+    return () => {
+      isActive = false
+      window.clearInterval(intervalId)
+    }
+  }, [])
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(contractAddress)
@@ -175,6 +262,34 @@ export default function App() {
     link.href = selectedMedia.src || ""
     link.click()
   }
+
+  const formatUsd = (value, options = {}) => {
+    if (value === null || Number.isNaN(value)) return "—"
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      ...options
+    })
+    return formatter.format(value)
+  }
+
+  const formatCompact = (value, options = {}) => {
+    if (value === null || Number.isNaN(value)) return "—"
+    const formatter = new Intl.NumberFormat("en-US", {
+      notation: "compact",
+      maximumFractionDigits: 2,
+      ...options
+    })
+    return formatter.format(value)
+  }
+
+  const statsItems = [
+    { label: "Price", value: formatUsd(stats.price, { maximumFractionDigits: stats.price && stats.price < 1 ? 6 : 2 }) },
+    { label: "FDV", value: formatUsd(stats.fdv, { notation: "compact", maximumFractionDigits: 2 }) },
+    { label: "Holders", value: stats.holders ? formatCompact(stats.holders) : "—" },
+    { label: "Volume (24h)", value: formatUsd(stats.volume24h, { notation: "compact", maximumFractionDigits: 2 }) },
+    { label: "Liquidity", value: formatUsd(stats.liquidity, { notation: "compact", maximumFractionDigits: 2 }) }
+  ]
 
   return (
     <div className="page">
@@ -229,12 +344,14 @@ export default function App() {
       <main className="content">
         <section className="hero-wrap" id="hero">
           <div className="hero-card">
+            <div className="hero-art">
+              <img src="/UCUSD1-EAGLE.png" alt="Undisputed eagle art" className="hero-img" />
+            </div>
             <div className="hero-left">
-              <img src="/UCUSD1-Hero.png" alt="Undisputed hero title" className="hero-title-image" />
-              <p className="lede">
-                The Leader In Digital Assets. Built for champions, pioneers, and believers in the American dream of
-                financial freedom.
-              </p>
+              <div className="hero-title-wrap">
+                <img src="/UCUSD1-Hero.png" alt="Undisputed hero title" className="hero-title-image" />
+              </div>
+              <p className="hero-kicker">The Leader In Digital Assets</p>
               <div className="hero-actions">
                 <a className="button primary" href={launchUrl}>
                   Buy on USD1
@@ -246,20 +363,49 @@ export default function App() {
                   Mission
                 </a>
               </div>
-              <p className="micro">The Leader In Digital Assets.</p>
-            </div>
-            <div className="hero-art">
-              <img src="/UCUSD1-EAGLE.png" alt="Undisputed eagle art" className="hero-img" />
             </div>
           </div>
         </section>
 
-        <section className="about-section" id="about">
+        <section className="stats-strip animate" id="stats" data-animate>
+          <div className="stats-shell">
+            <div className="stats-header">
+              <span className="stats-label">Live Stats</span>
+              <span className="stats-meta">
+                {stats.updatedAt ? "Auto-refresh every 30s" : "Loading live data"}
+              </span>
+            </div>
+            <div className="stats-bar">
+              <div className="stats-marquee">
+                <div className="stats-track">
+                  {statsItems.map((item) => (
+                    <div key={item.label} className="stats-item">
+                      <span className="stats-name">{item.label}</span>
+                      <span className="stats-value">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="stats-track stats-track--clone" aria-hidden="true">
+                  {statsItems.map((item) => (
+                    <div key={`${item.label}-clone`} className="stats-item">
+                      <span className="stats-name">{item.label}</span>
+                      <span className="stats-value">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="about-section animate" id="about" data-animate>
           <div className="section-tag">About</div>
           <h2>{aboutCopy.title}</h2>
           <div className="about-body">
-            {aboutCopy.body.map((p) => (
-              <p key={p}>{p}</p>
+            {aboutCopy.body.map((item) => (
+              <p key={item.lead}>
+                <strong>{item.lead}.</strong> {item.text}
+              </p>
             ))}
           </div>
           <div className="truth-embed">
@@ -283,7 +429,24 @@ export default function App() {
           </div>
         </section>
 
-        <section className="mission-section" id="mission">
+        <section className="roadmap-section animate" id="roadmap" data-animate>
+          <div className="section-tag">Roadmap</div>
+          <h2>Undisputable Growth</h2>
+          <p className="section-lede">
+            Four phases designed to build hype, reward the loudest supporters, and expand the Undisputed movement.
+          </p>
+          <div className="roadmap-grid">
+            {roadmapSteps.map((step) => (
+              <div key={step.phase} className="roadmap-card">
+                <p className="roadmap-phase">{step.phase}</p>
+                <p className="roadmap-title">{step.title}</p>
+                <p className="roadmap-body">{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mission-section animate" id="mission" data-animate>
           <div className="section-tag">Mission</div>
           <h2>Champions, pioneers, freedom.</h2>
           <p className="section-lede">
@@ -299,7 +462,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="media-section" id="media">
+        <section className="media-section animate" id="media" data-animate>
           <div className="section-tag">Media</div>
           <h2>Eagle standard gallery</h2>
           <p className="section-lede">Shareable art for the champions. Pause for the moment or let it cruise.</p>
@@ -330,7 +493,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="buy-section" id="buy">
+        <section className="buy-section animate" id="buy" data-animate>
           <div className="section-tag">Buy</div>
           <h2>Three steps to join the champions</h2>
           <p className="section-lede">
@@ -362,7 +525,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="links-section" id="links">
+        <section className="links-section animate" id="links" data-animate>
           <div className="section-tag">Links</div>
           <h2>Official channels</h2>
           <p className="section-lede">Official links only. Bookmark and ignore impostors.</p>
