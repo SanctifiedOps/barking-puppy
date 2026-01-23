@@ -1,13 +1,13 @@
 ﻿import React from "react"
 
-const contractAddress = "TBA"
+const contractAddress = "CkbYA87RiD7K8Gd4mrueha3UyUFfrethNV7zSgRbonk"
 const ticker = "$UNDISPUTED"
 const mainX = "https://x.com/UCUSD1"
 const xCommunity = "https://x.com/i/communities/2014784341105135973"
-const launchUrl = "#buy"
+const launchUrl = "https://bonk.fun/token/CkbYA87RiD7K8Gd4mrueha3UyUFfrethNV7zSgRbonk"
 const truthPostUrl = "https://truthsocial.com/@realDonaldTrump/114857957325423668"
 const truthProfileUrl = "https://truthsocial.com/@realDonaldTrump"
-const statsTokenAddress = "GMvCfcZg8YvkkQmwDaAzCtHDrrEtgE74nQpQ7xNabonk"
+const statsTokenAddress = "CkbYA87RiD7K8Gd4mrueha3UyUFfrethNV7zSgRbonk"
 
 const aboutCopy = {
   title: "The Undisputed Narrative",
