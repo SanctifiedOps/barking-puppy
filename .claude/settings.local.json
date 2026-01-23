@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout:*)",
+      "Bash(gh api:*)",
+      "Bash(gh repo view:*)",
+      "Bash(for skill in automation-governance launch-alert-bot social-signal-bot trading-bot-architecture wallet-monitoring-bot)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/bots/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(done)",
+      "Bash(for skill in anchor-project-scaffold common-anchor-errors-debugger compressed-nfts-basics instruction-design-and-validation pda-design-playbook program-security-basics solana-account-model upgrade-vs-immutable-decision)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/core-dev/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(for skill in frontend-security-basics reading-onchain-state transaction-signing-and-feedback wallet-connection-ux)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/frontend/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(for skill in cost-planning-for-solana-apps indexing-strategy jito-bundles-and-priority-fees monitoring-and-alerting rpc-selection-and-resilience webhooks-and-event-processing)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/infra/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(for skill in fair-launch-patterns launch-readiness-checklist liquidity-and-price-dynamics-explainer post-launch-stabilisation-playbook sniper-dynamics-and-mitigation)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/launch/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(for skill in community-ops-playbook launch-announcement-structures memecoin-narrative-engine post-launch-content-cadence)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/marketing/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(for skill in post-launch-token-ops spl-token-create-and-configure token-2022-extensions token-authority-and-risk token-distribution-planning tokenomics-design-for-memecoins)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/tokens/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(for skill in jupiter-swap-integration pump-fun-mechanics token-analysis-checklist whale-wallet-analysis)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/trading/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(for skill in legitimacy-signals reputation-recovery-playbook rug-detection-checklist transparency-and-disclosures)",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/trust/$skill/README.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/bots/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/core-dev/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/frontend/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/infra/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/launch/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/marketing/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/tokens/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/trust/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(do curl -sL \"https://raw.githubusercontent.com/SanctifiedOps/solana-skills/main/skills/trading/$skill/SKILL.md\" -o \"$skill.md\")",
+      "Bash(find:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

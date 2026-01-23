@@ -2,8 +2,8 @@
 
 const contractAddress = "TBA"
 const ticker = "$UNDISPUTED"
-const mainX = "#"
-const xCommunity = "#"
+const mainX = "https://x.com/UCUSD1"
+const xCommunity = "https://x.com/i/communities/2014784341105135973"
 const launchUrl = "#buy"
 const truthPostUrl = "https://truthsocial.com/@realDonaldTrump/114857957325423668"
 const truthProfileUrl = "https://truthsocial.com/@realDonaldTrump"
@@ -22,12 +22,12 @@ const aboutCopy = {
     {
       lead: "Narrative",
       text:
-        "WLFI and USD1 momentum collides with the meme velocity of Bonk, capturing a moment where culture and capital move together on-chain."
+        "The stablecoin revolution meets meme culture—riding the wave of America's push to dominate crypto. Culture and capital moving together on-chain."
     },
     {
       lead: "Community",
       text:
-        "Launched on USD1 and powered by holders who believe in the American dream of financial freedom, coordination, and bold public momentum."
+        "Powered by holders building the movement together. Every buy amplifies the signal. Every share expands the reach."
     }
   ]
 }
@@ -37,16 +37,25 @@ const mediaPalette = [
   { color: "#0d2147", accent: "#e1b35a" },
   { color: "#102c5e", accent: "#f0c36a" },
   { color: "#081224", accent: "#cfa047" },
-  { color: "#0e1c3f", accent: "#f2c97c" }
+  { color: "#0e1c3f", accent: "#f2c97c" },
+  { color: "#0a2856", accent: "#daa520" },
+  { color: "#091d42", accent: "#e8b84a" },
+  { color: "#0c2a5c", accent: "#d4a84b" },
+  { color: "#071530", accent: "#f5d080" },
+  { color: "#0f2348", accent: "#c9a035" },
+  { color: "#0b2050", accent: "#e0b050" },
+  { color: "#0a1a3d", accent: "#f0c060" },
+  { color: "#0d2860", accent: "#d8a840" },
+  { color: "#08142a", accent: "#e5c070" }
 ]
 
-const mediaGlob = import.meta.glob("../public/whart*.png", { eager: true, as: "url" })
+const mediaGlob = import.meta.glob("../public/UDUSD1-PIC*.png", { eager: true, as: "url" })
 
 const mediaItems = (() => {
   const entries = Object.entries(mediaGlob).map(([path, src]) => {
-    const match = path.match(/whart\s*\((\d+)\)/i)
+    const match = path.match(/UDUSD1-PIC\s*\((\d+)\)/i)
     const index = match ? Number(match[1]) : 999
-    return { src, index, title: `Undisputed Meme ${match ? match[1] : ""}`.trim() }
+    return { src, index, title: `Undisputed ${match ? match[1] : ""}`.trim() }
   })
   if (entries.length === 0) {
     return mediaPalette.map((p, idx) => ({
@@ -75,17 +84,17 @@ const missionPillars = [
   {
     title: "Champion",
     body:
-      "Carry the eagle signal and back the call for America to lead digital assets."
+      "Share memes, stack " + ticker + ", and amplify the signal. Every holder strengthens the movement."
   },
   {
     title: "Pioneer",
     body:
-      "Push WLFI and USD1 momentum, move fast, and keep the narrative on-chain."
+      "Move fast, stay coordinated, and keep the narrative visible. First movers set the pace."
   },
   {
     title: "Freedom",
     body:
-      "Build the American dream of financial freedom with a community-first meme economy."
+      "Build financial independence with a community that rewards participation and conviction."
   }
 ]
 
@@ -93,17 +102,17 @@ const buySteps = [
   {
     step: "Step 1",
     title: "Set up your wallet",
-    body: "Get a wallet ready and follow official channels so you can move fast and safely."
+    body: "Download Phantom or Solflare. Bookmark our official X for verified links and updates."
   },
   {
     step: "Step 2",
     title: "Prepare USD1",
-    body: "Acquire USD1 and double-check the official contract address on every swap."
+    body: "Get USD1 stablecoin ready. Always verify the contract address before any swap."
   },
   {
     step: "Step 3",
     title: "Swap for " + ticker,
-    body: "Use the official USD1 route, secure your keys, and join the champions."
+    body: "Use the official route, secure your keys, and join the champions. Welcome aboard."
   }
 ]
 
@@ -112,25 +121,25 @@ const roadmapSteps = [
     phase: "Phase 1",
     title: "Launch and community build",
     body:
-      "We went live on USD1 and rallied the first wave of champions. The goal is visibility, momentum, and a daily flow of memes that keep the story front and center."
+      "Live on USD1. Rally the first wave of champions with daily memes, visibility campaigns, and coordinated community momentum."
   },
   {
     phase: "Phase 2",
     title: "Reinvest into the brand",
     body:
-      "Creator fees go back into sharper art, cinematic video drops, giveaways, and community airdrops that reward the loudest supporters."
+      "Fees reinvested into professional art, video drops, and weekly airdrops. Your trades fund content that pumps the narrative."
   },
   {
     phase: "Phase 3",
     title: "Allied partnerships",
     body:
-      "We team with WLFI and USD1 aligned creators, brands, and communities. Expect competitions, collabs, and virtual events that push reach and hype."
+      "Strategic collabs with aligned creators and communities. Competitions, events, and cross-promotion that expands our reach."
   },
   {
     phase: "Phase 4",
     title: "Undisputed expansion",
     body:
-      "Community led initiatives, charitable donations, listing explorations, and the Undisputed commemorative challenge coin giveaway."
+      "Community initiatives, charitable contributions, exchange explorations, and the exclusive commemorative challenge coin drop."
   }
 ]
 
@@ -139,7 +148,11 @@ export default function App() {
   const [paused, setPaused] = React.useState(false)
   const [selectedMedia, setSelectedMedia] = React.useState(null)
   const mediaTrackRef = React.useRef(null)
+  const heroVideoRef = React.useRef(null)
+  const [heroVideoMuted, setHeroVideoMuted] = React.useState(true)
+  const [heroVideoPaused, setHeroVideoPaused] = React.useState(false)
   const [menuOpen, setMenuOpen] = React.useState(false)
+  const [scrollProgress, setScrollProgress] = React.useState(0)
   const [stats, setStats] = React.useState({
     price: null,
     fdv: null,
@@ -193,6 +206,55 @@ export default function App() {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0
+      setScrollProgress(progress)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const toggleHeroVideoMute = () => {
+    const nextMuted = !heroVideoMuted
+    setHeroVideoMuted(nextMuted)
+    if (heroVideoRef.current) {
+      heroVideoRef.current.muted = nextMuted
+    }
+  }
+
+  const toggleHeroVideoPlay = async () => {
+    const video = heroVideoRef.current
+    if (!video) return
+    if (video.paused) {
+      try {
+        await video.play()
+        setHeroVideoPaused(false)
+      } catch (err) {
+        setHeroVideoPaused(true)
+      }
+    } else {
+      video.pause()
+      setHeroVideoPaused(true)
+    }
+  }
+
+  const restartHeroVideo = async () => {
+    const video = heroVideoRef.current
+    if (!video) return
+    video.currentTime = 0
+    if (video.paused) {
+      try {
+        await video.play()
+        setHeroVideoPaused(false)
+      } catch (err) {
+        setHeroVideoPaused(true)
+      }
+    }
+  }
 
   React.useEffect(() => {
     let isActive = true
@@ -311,8 +373,15 @@ export default function App() {
   ]
   const statsRow = [...statsItems, ...statsItems, ...statsItems]
 
+  const isLoading = !stats.updatedAt
+
   return (
     <div className="page">
+      <div
+        className="scroll-progress"
+        style={{ transform: `scaleX(${scrollProgress})` }}
+        aria-hidden="true"
+      />
       <div className="ribbon" aria-hidden="true" />
       <header className="site-header">
         <div className="brand">
@@ -365,7 +434,64 @@ export default function App() {
         <section className="hero-wrap" id="hero">
           <div className="hero-card">
             <div className="hero-art">
-              <img src="/UCUSD1-EAGLE.png" alt="Undisputed eagle art" className="hero-img" />
+              <video
+                src="/UCUSD1-VID2%20(2).mp4"
+                autoPlay
+                loop
+                muted={heroVideoMuted}
+                playsInline
+                className="hero-video"
+                ref={heroVideoRef}
+                onPlay={() => setHeroVideoPaused(false)}
+                onPause={() => setHeroVideoPaused(true)}
+              />
+              <div className="hero-video-controls" role="group" aria-label="Hero video controls">
+                <button
+                  type="button"
+                  className="hero-icon-button"
+                  onClick={toggleHeroVideoPlay}
+                  aria-label={heroVideoPaused ? "Play video" : "Pause video"}
+                  title={heroVideoPaused ? "Play" : "Pause"}
+                >
+                  {heroVideoPaused ? (
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M8 5l11 7-11 7z" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                    </svg>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className="hero-icon-button"
+                  onClick={restartHeroVideo}
+                  aria-label="Restart video"
+                  title="Restart"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M12 6V3L8 7l4 4V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6z" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className="hero-icon-button"
+                  onClick={toggleHeroVideoMute}
+                  aria-label={heroVideoMuted ? "Unmute video" : "Mute video"}
+                  title={heroVideoMuted ? "Unmute" : "Mute"}
+                >
+                  {heroVideoMuted ? (
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M4 9v6h4l5 5V4L8 9H4zM16 9l4 4m0-4l-4 4" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M4 9v6h4l5 5V4L8 9H4zM16 8a4 4 0 0 1 0 8M18.5 5.5a8 8 0 0 1 0 13" />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
             <div className="hero-left">
               <div className="hero-title-wrap">
@@ -379,9 +505,14 @@ export default function App() {
                 <a className="button ghost" href="#about">
                   Read the narrative
                 </a>
-                <a className="button ghost" href="#mission">
-                  Mission
+                <a className="button ghost" href="https://x.com/i/communities/2014784341105135973">
+                  Community
                 </a>
+              </div>
+              <div className="trust-signals">
+                <span className="trust-badge">Liquidity Locked</span>
+                <span className="trust-badge">Verified on DexScreener</span>
+                <span className="trust-badge">Community Driven</span>
               </div>
             </div>
           </div>
@@ -401,7 +532,9 @@ export default function App() {
                   {statsRow.map((item, index) => (
                     <div key={`${item.label}-${index}`} className="stats-item">
                       <span className="stats-name">{item.label}</span>
-                      <span className="stats-value">{item.value}</span>
+                      <span className={`stats-value ${isLoading ? "loading" : ""}`}>
+                        {isLoading ? "" : item.value}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -409,7 +542,9 @@ export default function App() {
                   {statsRow.map((item, index) => (
                     <div key={`${item.label}-clone-${index}`} className="stats-item">
                       <span className="stats-name">{item.label}</span>
-                      <span className="stats-value">{item.value}</span>
+                      <span className={`stats-value ${isLoading ? "loading" : ""}`}>
+                        {isLoading ? "" : item.value}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -451,7 +586,7 @@ export default function App() {
 
         <section className="roadmap-section animate" id="roadmap" data-animate>
           <div className="section-tag">Roadmap</div>
-          <h2>Undisputable Growth</h2>
+          <h2>Undisputed Growth</h2>
           <p className="section-lede">
             Four phases designed to build hype, reward the loudest supporters, and expand the Undisputed movement.
           </p>
@@ -467,6 +602,7 @@ export default function App() {
         </section>
 
         <section className="mission-section animate" id="mission" data-animate>
+          <img src="/UCUSD1-EAGLE.png" alt="Undisputed eagle" className="mission-eagle" />
           <div className="section-tag">Mission</div>
           <h2>Champions, pioneers, freedom.</h2>
           <p className="section-lede">
@@ -484,8 +620,8 @@ export default function App() {
 
         <section className="media-section animate" id="media" data-animate>
           <div className="section-tag">Media</div>
-          <h2>Eagle standard gallery</h2>
-          <p className="section-lede">Shareable art for the champions. Pause for the moment or let it cruise.</p>
+          <h2>Media from the movement</h2>
+          <p className="section-lede">Shareable art for the champions.</p>
           <div className="media-controls">
             <button className="circle-btn" onClick={() => handleMediaScroll("prev")} aria-label="Previous media">
               {"<"}
