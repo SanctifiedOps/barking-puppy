@@ -284,9 +284,10 @@ export default function App() {
         const data = await dexResult.value.json()
         const pairs = Array.isArray(data.pairs) ? data.pairs : []
         const bestPair = pairs.reduce((best, pair) => {
-          if (!pair?.liquidity?.usd) return best
           if (!best) return pair
-          return pair.liquidity.usd > best.liquidity.usd ? pair : best
+          const bestLiq = best?.liquidity?.usd ?? best?.fdv ?? 0
+          const pairLiq = pair?.liquidity?.usd ?? pair?.fdv ?? 0
+          return pairLiq > bestLiq ? pair : best
         }, null)
 
         if (!bestPair || !isActive) return
