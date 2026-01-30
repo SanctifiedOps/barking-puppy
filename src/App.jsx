@@ -74,7 +74,8 @@ const mediaItems = (() => {
 const linkTiles = [
   { label: "Buy on Pump.fun", href: launchUrl, description: "Get your $BP tokens here", primary: true },
   { label: "Dev X", href: mainX, description: "Follow the dev's official account" },
-  { label: "Community", href: xCommunity, description: "Join the Barking Puppy pack" }
+  { label: "Community", href: xCommunity, description: "Join the Barking Puppy pack" },
+  { label: "KevinLegend14", href: "https://instagram.com/kevinlegend14", description: "The legend's Instagram" }
 ]
 
 const missionPillars = [
@@ -505,6 +506,9 @@ export default function App() {
               <a className="button ghost truth-embed__cta" href={xCommunity} target="_blank" rel="noreferrer">
                 Join Community
               </a>
+              <a className="button ghost truth-embed__cta" href="https://instagram.com/kevinlegend14" target="_blank" rel="noreferrer">
+                KevinLegend14
+              </a>
             </div>
           </div>
         </section>
@@ -596,7 +600,7 @@ export default function App() {
                   </button>
                 )}
                 {idx === 2 && (
-                  <a className="button primary step-action" href="#links">
+                  <a className="button primary step-action" href={launchUrl} target="_blank" rel="noreferrer">
                     Join the pack
                   </a>
                 )}
