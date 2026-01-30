@@ -384,7 +384,7 @@ export default function App() {
       <div className="ribbon" aria-hidden="true" />
       <header className="site-header">
         <div className="brand">
-          <img src="/bp logo.png" alt="Barking Puppy mark" className="brand-mark" />
+          <img src="/mask.png" alt="Barking Puppy mark" className="brand-mark" />
           <div>
             <p className="brand-kicker">Barking Puppy</p>
             <p className="brand-name">{ticker}</p>
