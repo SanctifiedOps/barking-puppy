@@ -640,6 +640,9 @@ export default function App() {
           Nothing here is financial advice. Verify contract addresses ({contractAddress}), stay skeptical, and never risk
           more than you can lose.
         </p>
+        <p className="foot-credit">
+          Website designed by <a href="https://x.com/opsiriussol" target="_blank" rel="noopener noreferrer">OPSIRIUS</a>
+        </p>
       </footer>
 
       {selectedMedia && (

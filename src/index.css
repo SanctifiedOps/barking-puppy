@@ -1692,6 +1692,24 @@ main > section {
   word-break: break-word;
 }
 
+.foot-credit {
+  margin: 8px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.foot-credit a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.foot-credit a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
 
 @media (max-width: 640px) {
   .site-footer {
