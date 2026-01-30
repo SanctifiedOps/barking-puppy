@@ -76,8 +76,13 @@ body {
   .buy-card,
   .media-card,
   .hero-title-wrap::after,
-  .stats-marquee {
+  .stats-marquee,
+  .hero-title-text,
+  .hero-buttons,
+  .hero-buttons .button,
+  .hero-stats {
     animation: none !important;
+    opacity: 1 !important;
   }
 }
 
@@ -363,6 +368,8 @@ main > section {
   width: 100%;
   max-width: var(--content-width);
   margin-top: 40px;
+  opacity: 0;
+  animation: heroFadeIn 0.7s ease-out 0.7s forwards;
 }
 
 .hero-wrap + .about-section {
@@ -534,6 +541,28 @@ main > section {
   z-index: 1;
 }
 
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeInScale {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .hero-title-text {
   font-family: "Oswald", sans-serif;
   font-size: clamp(3.5rem, 12vw, 10rem);
@@ -544,6 +573,7 @@ main > section {
   text-transform: uppercase;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.6);
   margin: 0;
+  animation: heroFadeInScale 0.8s ease-out forwards;
 }
 
 .hero-buttons {
@@ -551,6 +581,25 @@ main > section {
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
+  opacity: 0;
+  animation: heroFadeIn 0.6s ease-out 0.3s forwards;
+}
+
+.hero-buttons .button {
+  opacity: 0;
+  animation: heroFadeIn 0.5s ease-out forwards;
+}
+
+.hero-buttons .button:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+.hero-buttons .button:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.hero-buttons .button:nth-child(3) {
+  animation-delay: 0.6s;
 }
 
 .hero-card {
