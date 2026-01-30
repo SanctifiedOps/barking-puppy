@@ -1,65 +1,62 @@
 ﻿import React from "react"
 
-const contractAddress = "CkbYA87RiD7K8Gd4mrueha3UyUFfrethNV7zSgRbonk"
-const ticker = "$UNDISPUTED"
-const mainX = "https://x.com/UCUSD1"
-const xCommunity = "https://x.com/i/communities/2014784341105135973"
-const launchUrl = "https://bonk.fun/token/CkbYA87RiD7K8Gd4mrueha3UyUFfrethNV7zSgRbonk"
-const truthPostUrl = "https://truthsocial.com/@realDonaldTrump/114857957325423668"
-const truthProfileUrl = "https://truthsocial.com/@realDonaldTrump"
-const statsTokenAddress = "CkbYA87RiD7K8Gd4mrueha3UyUFfrethNV7zSgRbonk"
+const contractAddress = "3B1ijcocM5EDga6XxQ7JLW7weocQPWWjuhBYG8Vepump"
+const ticker = "$BP"
+const mainX = "https://x.com/BPuppy80020"
+const xCommunity = "https://x.com/i/communities/2015764395733708955"
+const launchUrl = "https://pump.fun/coin/3B1ijcocM5EDga6XxQ7JLW7weocQPWWjuhBYG8Vepump"
+const statsTokenAddress = "3B1ijcocM5EDga6XxQ7JLW7weocQPWWjuhBYG8Vepump"
 
 const aboutCopy = {
-  title: "The Undisputed Narrative",
+  title: "The Barking Puppy Origin",
   body: [
     {
-      lead: "Undisputed Coin",
+      lead: "Token First",
       text:
-        "(" +
         ticker +
-        ") is a meme coin built on the belief that America is the undisputed leader in digital assets. The eagle mascot stands for champions and pioneers who refuse to play second."
+        " was minted before any public X account existed. No hype. No marketing. No socials. Just a contract on-chain. That alone separates it from 99% of meme launches."
     },
     {
-      lead: "Narrative",
+      lead: "The Connection",
       text:
-        "The stablecoin revolution meets meme culture—riding the wave of America's push to dominate crypto. Culture and capital moving together on-chain."
+        "Hours later, the official X appeared. Then Instagram (kevinlegend14). Both linked. Same visuals. Same theme. Same narrative. Coin → identity → socials. Not the other way around."
     },
     {
-      lead: "Community",
+      lead: "Survivor",
       text:
-        "Powered by holders building the movement together. Every buy amplifies the signal. Every share expands the reach."
+        "99% of coins would have died already if they went through what " + ticker + " went through. This one didn't. You're watching the origin story of a meme brand forming in real time."
     }
   ]
 }
 
 const mediaPalette = [
-  { color: "#0b2f6f", accent: "#d6a347" },
-  { color: "#0d2147", accent: "#e1b35a" },
-  { color: "#102c5e", accent: "#f0c36a" },
-  { color: "#081224", accent: "#cfa047" },
-  { color: "#0e1c3f", accent: "#f2c97c" },
-  { color: "#0a2856", accent: "#daa520" },
-  { color: "#091d42", accent: "#e8b84a" },
-  { color: "#0c2a5c", accent: "#d4a84b" },
-  { color: "#071530", accent: "#f5d080" },
-  { color: "#0f2348", accent: "#c9a035" },
-  { color: "#0b2050", accent: "#e0b050" },
-  { color: "#0a1a3d", accent: "#f0c060" },
-  { color: "#0d2860", accent: "#d8a840" },
-  { color: "#08142a", accent: "#e5c070" }
+  { color: "#3d2810", accent: "#d4a04a" },
+  { color: "#4a3015", accent: "#e8b84a" },
+  { color: "#2d1f0d", accent: "#f0c36a" },
+  { color: "#5c3d1a", accent: "#cfa047" },
+  { color: "#3a2812", accent: "#f2c97c" },
+  { color: "#4d361a", accent: "#daa520" },
+  { color: "#352410", accent: "#e8c84a" },
+  { color: "#4a3518", accent: "#d4b84b" },
+  { color: "#2a1c0c", accent: "#f5d080" },
+  { color: "#3d2a14", accent: "#c9a035" },
+  { color: "#4a3820", accent: "#e0b050" },
+  { color: "#332512", accent: "#f0c060" },
+  { color: "#5a4020", accent: "#d8a840" },
+  { color: "#28180a", accent: "#e5c070" }
 ]
 
-const mediaGlob = import.meta.glob("../public/UDUSD1-PIC*.png", { eager: true, as: "url" })
+const mediaGlob = import.meta.glob("../public/bp-pics*.*", { eager: true, query: "?url", import: "default" })
 
 const mediaItems = (() => {
   const entries = Object.entries(mediaGlob).map(([path, src]) => {
-    const match = path.match(/UDUSD1-PIC\s*\((\d+)\)/i)
+    const match = path.match(/bp-pics\s*\((\d+)\)/i)
     const index = match ? Number(match[1]) : 999
-    return { src, index, title: `Undisputed ${match ? match[1] : ""}`.trim() }
+    return { src, index, title: `Barking Puppy ${match ? match[1] : ""}`.trim() }
   })
   if (entries.length === 0) {
     return mediaPalette.map((p, idx) => ({
-      title: ["Eagle Standard", "USD1 Live", "WLFI Signal", "Undisputed Champions", "Digital Asset Frontier"][idx] || `Meme ${idx + 1}`,
+      title: ["The Origin", "Survivor", "Popcorn Time", "On-Chain Proof", "Community Meme"][idx] || `Meme ${idx + 1}`,
       color: p.color,
       accent: p.accent
     }))
@@ -67,7 +64,7 @@ const mediaItems = (() => {
   return entries
     .sort((a, b) => a.index - b.index)
     .map((entry, idx) => ({
-      title: entry.title || `Undisputed Meme ${idx + 1}`,
+      title: entry.title || `Barking Puppy Meme ${idx + 1}`,
       color: mediaPalette[idx % mediaPalette.length].color,
       accent: mediaPalette[idx % mediaPalette.length].accent,
       src: entry.src
@@ -75,26 +72,26 @@ const mediaItems = (() => {
 })()
 
 const linkTiles = [
-  { label: "Buy on USD1", href: launchUrl, description: "Swap details and routes", primary: true },
-  { label: "Main X", href: mainX, description: "Official announcements and statements" },
-  { label: "Community", href: xCommunity, description: "Champions, pioneers, and coordination" }
+  { label: "Buy on Pump.fun", href: launchUrl, description: "Get your $BP tokens here", primary: true },
+  { label: "Dev X", href: mainX, description: "Follow the dev's official account" },
+  { label: "Community", href: xCommunity, description: "Join the Barking Puppy pack" }
 ]
 
 const missionPillars = [
   {
-    title: "Champion",
+    title: "Authenticity",
     body:
-      "Share memes, stack " + ticker + ", and amplify the signal. Every holder strengthens the movement."
+      "Token first, socials second. No pre-launch hype. No insider allocations. Just on-chain proof of intent."
   },
   {
-    title: "Pioneer",
+    title: "Transparency",
     body:
-      "Move fast, stay coordinated, and keep the narrative visible. First movers set the pace."
+      "Dev buybacks and burns visible on-chain. Over 2.5% of supply burned. No team wallet. Just community."
   },
   {
-    title: "Freedom",
+    title: "Community",
     body:
-      "Build financial independence with a community that rewards participation and conviction."
+      "Direct airdrops to holders. Dev engages in chat. Memes flow from community to official accounts."
   }
 ]
 
@@ -102,44 +99,44 @@ const buySteps = [
   {
     step: "Step 1",
     title: "Set up your wallet",
-    body: "Download Phantom or Solflare. Bookmark our official X for verified links and updates."
+    body: "Download Phantom or Solflare. Follow the dev's X and join the community for updates."
   },
   {
     step: "Step 2",
-    title: "Prepare USD1",
-    body: "Get USD1 stablecoin ready. Always verify the contract address before any swap."
+    title: "Get SOL ready",
+    body: "Fund your wallet with SOL. Always verify the contract address before any swap."
   },
   {
     step: "Step 3",
     title: "Swap for " + ticker,
-    body: "Use the official route, secure your keys, and join the champions. Welcome aboard."
+    body: "Head to Pump.fun, paste the CA, and join the pack. Welcome to Barking Puppy."
   }
 ]
 
-const roadmapSteps = [
+const loreTimeline = [
   {
-    phase: "Phase 1",
-    title: "Launch and community build",
+    phase: "Jan 17, 2026",
+    title: "The Silent Mint",
     body:
-      "Live on USD1. Rally the first wave of champions with daily memes, visibility campaigns, and coordinated community momentum."
+      "A token appears on-chain. No announcement. No socials. No hype. Just a contract address sitting there, waiting to be discovered. Token first."
   },
   {
-    phase: "Phase 2",
-    title: "Reinvest into the brand",
+    phase: "3h 56m Later",
+    title: "The Account Emerges",
     body:
-      "Fees reinvested into professional art, video drops, and weekly airdrops. Your trades fund content that pumps the narrative."
+      "An X account surfaces. Same visuals. Same energy. The timing is deliberate. Someone is building something. The question: who?"
   },
   {
-    phase: "Phase 3",
-    title: "Allied partnerships",
+    phase: "The Connections",
+    title: "What If It's Him?",
     body:
-      "Strategic collabs with aligned creators and communities. Competitions, events, and cross-promotion that expands our reach."
+      "KevinLegend14 on Instagram. The brother angle. The GameStop parallels. Coincidence? Maybe. But the confirmations keep rolling in. We're watching closely."
   },
   {
-    phase: "Phase 4",
-    title: "Undisputed expansion",
+    phase: "Right Now",
+    title: "You're Early",
     body:
-      "Community initiatives, charitable contributions, exchange explorations, and the exclusive commemorative challenge coin drop."
+      "This is the part of the story where people look back and say 'I wish I was there.' The lore is still being written. The legend is still forming."
   }
 ]
 
@@ -340,7 +337,7 @@ export default function App() {
   const downloadMedia = () => {
     if (!selectedMedia) return
     const link = document.createElement("a")
-    link.download = `${selectedMedia.title.replace(/\s+/g, "-") || "undisputed-media"}.png`
+    link.download = `${selectedMedia.title.replace(/\s+/g, "-") || "barking-puppy-media"}.png`
     link.href = selectedMedia.src || ""
     link.click()
   }
@@ -386,9 +383,9 @@ export default function App() {
       <div className="ribbon" aria-hidden="true" />
       <header className="site-header">
         <div className="brand">
-          <img src="/UDUSD1%20FAVICON.png" alt="Undisputed coin mark" className="brand-mark" />
+          <img src="/bp logo.png" alt="Barking Puppy mark" className="brand-mark" />
           <div>
-            <p className="brand-kicker">Undisputed Coin</p>
+            <p className="brand-kicker">Barking Puppy</p>
             <p className="brand-name">{ticker}</p>
           </div>
         </div>
@@ -425,7 +422,7 @@ export default function App() {
               {copied ? "Copied" : "Copy CA"}
             </button>
             <a className="chip primary" href={launchUrl}>
-              Buy on USD1
+              Buy on Pump.fun
             </a>
           </div>
         </div>
@@ -433,121 +430,48 @@ export default function App() {
 
       <main className="content">
         <section className="hero-wrap" id="hero">
-          <div className="hero-card">
-            <div className="hero-art">
-              <video
-                src="/UCUSD1-VID2%20(2).mp4"
-                autoPlay
-                loop
-                muted={heroVideoMuted}
-                playsInline
-                className="hero-video"
-                ref={heroVideoRef}
-                onPlay={() => setHeroVideoPaused(false)}
-                onPause={() => setHeroVideoPaused(true)}
-              />
-              <div className="hero-video-controls" role="group" aria-label="Hero video controls">
-                <button
-                  type="button"
-                  className="hero-icon-button"
-                  onClick={toggleHeroVideoPlay}
-                  aria-label={heroVideoPaused ? "Play video" : "Pause video"}
-                  title={heroVideoPaused ? "Play" : "Pause"}
-                >
-                  {heroVideoPaused ? (
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <path d="M8 5l11 7-11 7z" />
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-                    </svg>
-                  )}
-                </button>
-                <button
-                  type="button"
-                  className="hero-icon-button"
-                  onClick={restartHeroVideo}
-                  aria-label="Restart video"
-                  title="Restart"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M12 6V3L8 7l4 4V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6z" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  className="hero-icon-button"
-                  onClick={toggleHeroVideoMute}
-                  aria-label={heroVideoMuted ? "Unmute video" : "Mute video"}
-                  title={heroVideoMuted ? "Unmute" : "Mute"}
-                >
-                  {heroVideoMuted ? (
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <path d="M4 9v6h4l5 5V4L8 9H4zM16 9l4 4m0-4l-4 4" />
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <path d="M4 9v6h4l5 5V4L8 9H4zM16 8a4 4 0 0 1 0 8M18.5 5.5a8 8 0 0 1 0 13" />
-                    </svg>
-                  )}
-                </button>
-              </div>
+          <div className="hero-content">
+            <h1 className="hero-title-text">BARKING PUPPY</h1>
+            <div className="hero-buttons">
+              <a className="button primary" href={launchUrl}>
+                Buy Now
+              </a>
+              <a className="button ghost" href={xCommunity}>
+                Join Community
+              </a>
+              <button className="button ghost" onClick={handleCopy}>
+                {copied ? "Copied!" : "Copy CA"}
+              </button>
             </div>
-            <div className="hero-left">
-              <div className="hero-title-wrap">
-                <img src="/UCUSD1-Hero.png" alt="Undisputed hero title" className="hero-title-image" />
+            <div className="hero-stats">
+              <div className="stats-header">
+                <span className="stats-label">Live Stats</span>
+                <span className="stats-meta">
+                  {stats.updatedAt ? "Auto-refresh every 30s" : "Loading live data"}
+                </span>
               </div>
-              <p className="hero-kicker">The Leader In Digital Assets</p>
-              <div className="hero-actions">
-                <a className="button primary" href={launchUrl}>
-                  Buy on USD1
-                </a>
-                <a className="button ghost" href="#about">
-                  Read the narrative
-                </a>
-                <a className="button ghost" href="https://x.com/i/communities/2014784341105135973">
-                  Community
-                </a>
-              </div>
-              <div className="trust-signals">
-                <span className="trust-badge">Liquidity Locked</span>
-                <span className="trust-badge">Verified on DexScreener</span>
-                <span className="trust-badge">Community Driven</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="stats-strip animate" id="stats" data-animate>
-          <div className="stats-shell">
-            <div className="stats-header">
-              <span className="stats-label">Live Stats</span>
-              <span className="stats-meta">
-                {stats.updatedAt ? "Auto-refresh every 30s" : "Loading live data"}
-              </span>
-            </div>
-            <div className="stats-bar">
-              <div className="stats-marquee">
-                <div className="stats-track">
-                  {statsRow.map((item, index) => (
-                    <div key={`${item.label}-${index}`} className="stats-item">
-                      <span className="stats-name">{item.label}</span>
-                      <span className={`stats-value ${isLoading ? "loading" : ""}`}>
-                        {isLoading ? "" : item.value}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <div className="stats-track stats-track--clone" aria-hidden="true">
-                  {statsRow.map((item, index) => (
-                    <div key={`${item.label}-clone-${index}`} className="stats-item">
-                      <span className="stats-name">{item.label}</span>
-                      <span className={`stats-value ${isLoading ? "loading" : ""}`}>
-                        {isLoading ? "" : item.value}
-                      </span>
-                    </div>
-                  ))}
+              <div className="stats-bar">
+                <div className="stats-marquee">
+                  <div className="stats-track">
+                    {statsRow.map((item, index) => (
+                      <div key={`${item.label}-${index}`} className="stats-item">
+                        <span className="stats-name">{item.label}</span>
+                        <span className={`stats-value ${isLoading ? "loading" : ""}`}>
+                          {isLoading ? "" : item.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="stats-track stats-track--clone" aria-hidden="true">
+                    {statsRow.map((item, index) => (
+                      <div key={`${item.label}-clone-${index}`} className="stats-item">
+                        <span className="stats-name">{item.label}</span>
+                        <span className={`stats-value ${isLoading ? "loading" : ""}`}>
+                          {isLoading ? "" : item.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -566,33 +490,33 @@ export default function App() {
           </div>
           <div className="truth-embed">
             <div className="truth-embed__header">
-              <span className="truth-embed__label">Truth Social</span>
-              <a className="truth-embed__handle" href={truthProfileUrl} target="_blank" rel="noreferrer">
-                @realDonaldTrump
+              <span className="truth-embed__label">The Dev</span>
+              <a className="truth-embed__handle" href={mainX} target="_blank" rel="noreferrer">
+                @BPuppy80020
               </a>
             </div>
             <div className="truth-embed__frame">
-              <img src="/ucusd1-trump.png" alt="Truth Social update screenshot" className="truth-embed__image" />
+              <img src="/EC-hx68f_400x400.jpg" alt="The Dev" className="truth-embed__image" />
             </div>
             <div className="truth-embed__actions">
-              <a className="button ghost truth-embed__cta" href={truthPostUrl} target="_blank" rel="noreferrer">
-                View the post
+              <a className="button ghost truth-embed__cta" href={mainX} target="_blank" rel="noreferrer">
+                Follow the Dev
               </a>
-              <a className="button ghost truth-embed__cta" href={truthProfileUrl} target="_blank" rel="noreferrer">
-                Visit Trump's page
+              <a className="button ghost truth-embed__cta" href={xCommunity} target="_blank" rel="noreferrer">
+                Join Community
               </a>
             </div>
           </div>
         </section>
 
         <section className="roadmap-section animate" id="roadmap" data-animate>
-          <div className="section-tag">Roadmap</div>
-          <h2>Undisputed Growth</h2>
+          <div className="section-tag">The Lore</div>
+          <h2>What If It's Him?</h2>
           <p className="section-lede">
-            Four phases designed to build hype, reward the loudest supporters, and expand the Undisputed movement.
+            The timeline. The connections. The confirmations keep rolling in. We're early.
           </p>
           <div className="roadmap-grid">
-            {roadmapSteps.map((step) => (
+            {loreTimeline.map((step) => (
               <div key={step.phase} className="roadmap-card">
                 <p className="roadmap-phase">{step.phase}</p>
                 <p className="roadmap-title">{step.title}</p>
@@ -603,11 +527,10 @@ export default function App() {
         </section>
 
         <section className="mission-section animate" id="mission" data-animate>
-          <img src="/UCUSD1-EAGLE.png" alt="Undisputed eagle" className="mission-eagle" />
           <div className="section-tag">Mission</div>
-          <h2>Champions, pioneers, freedom.</h2>
+          <h2>Authenticity. Transparency. Community.</h2>
           <p className="section-lede">
-            Undisputed Coin backs the narrative that America leads digital assets, and the community makes it visible.
+            Not a random pump. Not a copy. Not noise. A narrative forming in real time.
           </p>
           <div className="mission-grid">
             {missionPillars.map((pillar) => (
@@ -621,8 +544,8 @@ export default function App() {
 
         <section className="media-section animate" id="media" data-animate>
           <div className="section-tag">Media</div>
-          <h2>Media from the movement</h2>
-          <p className="section-lede">Shareable art for the champions.</p>
+          <h2>Media from the Pack</h2>
+          <p className="section-lede">Shareable memes for the community.</p>
           <div className="media-controls">
             <button className="circle-btn" onClick={() => handleMediaScroll("prev")} aria-label="Previous media">
               {"<"}
@@ -641,7 +564,7 @@ export default function App() {
                 className="media-card"
                 style={{ background: `linear-gradient(145deg, ${item.color}, ${item.accent})` }}
                 onClick={() => openMedia(item)}
-                aria-label={`Open ${item.title || "Undisputed meme"}`}
+                aria-label={`Open ${item.title || "Barking Puppy meme"}`}
               >
                 {item.src && <img src={item.src} alt={item.title} className="media-img" />}
                 <div className="media-overlay" />
@@ -652,7 +575,7 @@ export default function App() {
 
         <section className="buy-section animate" id="buy" data-animate>
           <div className="section-tag">Buy</div>
-          <h2>Three steps to join the champions</h2>
+          <h2>Three steps to join the pack</h2>
           <p className="section-lede">
             Always double-check official links and contract addresses. Move only what you can afford to risk.
           </p>
@@ -664,7 +587,7 @@ export default function App() {
                 <p className="step-body">{step.body}</p>
                 {idx === 0 && (
                   <a className="button primary step-action" href={launchUrl}>
-                    Buy on USD1
+                    Buy on Pump.fun
                   </a>
                 )}
                 {idx === 1 && (
@@ -674,7 +597,7 @@ export default function App() {
                 )}
                 {idx === 2 && (
                   <a className="button primary step-action" href="#links">
-                    Join the champions
+                    Join the pack
                   </a>
                 )}
               </div>
@@ -705,10 +628,9 @@ export default function App() {
       </main>
 
       <footer className="site-footer" id="footer">
-        <p className="foot-year">(c) {new Date().getFullYear()} Undisputed Coin</p>
+        <p className="foot-year">(c) {new Date().getFullYear()} Barking Puppy</p>
         <p className="foot-note">
-          Undisputed Coin is a community-driven meme project aligned with the USD1 narrative and the call for America to
-          lead digital assets.
+          Barking Puppy is a community-driven meme project. Token first, socials second. You're either early or you'll read this later.
         </p>
         <p className="foot-note">
           Nothing here is financial advice. Verify contract addresses ({contractAddress}), stay skeptical, and never risk

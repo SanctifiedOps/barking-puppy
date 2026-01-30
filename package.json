@@ -1,8 +1,8 @@
 {
-  "name": "wh-site",
+  "name": "barking-puppy-site",
   "private": true,
   "version": "0.0.0",
-  "description": "A site copied and rebranded from a template",
+  "description": "Barking Puppy ($BP) - Token First. Socials Second. Legend Forever.",
   "type": "module",
   "scripts": {
     "dev": "vite",
