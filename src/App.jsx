@@ -239,8 +239,8 @@ export default function App() {
             y: rightEye.reduce((sum, p) => sum + p.y, 0) / rightEye.length
           }
 
-          // Calculate distance between eyes and angle
-          const eyeDistance = Math.sqrt(
+          // Calculate distance between human eyes and angle
+          const humanEyeDistance = Math.sqrt(
             Math.pow(rightEyeCenter.x - leftEyeCenter.x, 2) +
             Math.pow(rightEyeCenter.y - leftEyeCenter.y, 2)
           )
@@ -249,32 +249,37 @@ export default function App() {
             rightEyeCenter.x - leftEyeCenter.x
           )
 
-          // Face center between the eyes
-          const faceCenterX = (leftEyeCenter.x + rightEyeCenter.x) / 2
-          const faceCenterY = (leftEyeCenter.y + rightEyeCenter.y) / 2
+          // Mask eye hole positions as percentage of mask dimensions
+          // These are where the CENTER of each eye hole is on the mask
+          const maskLeftEyeX = 0.35  // 35% from left edge
+          const maskRightEyeX = 0.65 // 65% from left edge
+          const maskEyeY = 0.40      // 40% from top edge
 
-          // Use actual mask aspect ratio (mask is wider than tall)
-          const maskAspectRatio = mask.naturalWidth / mask.naturalHeight
+          // Calculate the distance between mask eye holes (as fraction of mask width)
+          const maskEyeSpan = maskRightEyeX - maskLeftEyeX // 0.30
 
-          // Scale mask based on eye distance - eyes should span roughly 40% of mask width
-          const maskWidth = eyeDistance * 2.5
-          const maskHeight = maskWidth / maskAspectRatio
+          // Scale mask so mask eye distance = human eye distance
+          const maskWidth = humanEyeDistance / maskEyeSpan
+          const maskHeight = maskWidth * (mask.naturalHeight / mask.naturalWidth)
 
-          // Position mask so dog eye holes align with human eyes
-          // Higher value = mask moves UP
-          const maskEyeYPercent = 0.55
+          // Center point between human eyes
+          const humanEyeCenterX = (leftEyeCenter.x + rightEyeCenter.x) / 2
+          const humanEyeCenterY = (leftEyeCenter.y + rightEyeCenter.y) / 2
 
-          // Draw with rotation for tilted faces
+          // Center point between mask eye holes (as fraction)
+          const maskEyeCenterX = (maskLeftEyeX + maskRightEyeX) / 2 // 0.50
+
+          // Draw with rotation around the eye center point
           ctx.save()
-          ctx.translate(faceCenterX, faceCenterY)
+          ctx.translate(humanEyeCenterX, humanEyeCenterY)
           ctx.rotate(angle)
-          ctx.drawImage(
-            mask,
-            -maskWidth / 2,
-            -maskHeight * maskEyeYPercent,
-            maskWidth,
-            maskHeight
-          )
+
+          // Position mask so its eye center aligns with human eye center
+          // Offset from center: mask top-left corner position
+          const drawX = -maskWidth * maskEyeCenterX
+          const drawY = -maskHeight * maskEyeY
+
+          ctx.drawImage(mask, drawX, drawY, maskWidth, maskHeight)
           ctx.restore()
         })
       }
