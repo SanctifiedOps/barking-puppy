@@ -3,7 +3,7 @@
 const contractAddress = "3B1ijcocM5EDga6XxQ7JLW7weocQPWWjuhBYG8Vepump"
 const ticker = "$BP"
 const mainX = "https://x.com/BPuppy80020"
-const xCommunity = "https://x.com/i/communities/2015764395733708955"
+const xCommunity = "https://x.com/i/communities/2017378247273492968"
 const launchUrl = "https://pump.fun/coin/3B1ijcocM5EDga6XxQ7JLW7weocQPWWjuhBYG8Vepump"
 const statsTokenAddress = "3B1ijcocM5EDga6XxQ7JLW7weocQPWWjuhBYG8Vepump"
 
