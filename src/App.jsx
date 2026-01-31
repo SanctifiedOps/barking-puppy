@@ -224,12 +224,6 @@ export default function App() {
 
         setPuppifyError("No face detected - mask placed in center. Try a clearer photo for better results!")
       } else {
-        // Mask eye positions (as percentage of mask dimensions)
-        // Adjust these values to match where the dog's eyes are on mask.png
-        const maskLeftEyeX = 0.32  // 32% from left
-        const maskRightEyeX = 0.68 // 68% from left
-        const maskEyeY = 0.38      // 38% from top
-
         detections.forEach((det) => {
           const landmarks = det.landmarks
           const leftEye = landmarks.getLeftEye()
@@ -255,19 +249,18 @@ export default function App() {
             rightEyeCenter.x - leftEyeCenter.x
           )
 
-          // Calculate mask size based on eye distance
-          const maskEyeSpan = maskRightEyeX - maskLeftEyeX
-          const maskWidth = eyeDistance / maskEyeSpan
-          const maskHeight = maskWidth // Assuming square-ish mask
-
-          // Calculate where to place the mask so eyes align
+          // Face center between the eyes
           const faceCenterX = (leftEyeCenter.x + rightEyeCenter.x) / 2
           const faceCenterY = (leftEyeCenter.y + rightEyeCenter.y) / 2
 
-          // Position mask so its eye center aligns with face eye center
-          const maskCenterX = (maskLeftEyeX + maskRightEyeX) / 2
-          const maskX = faceCenterX - maskWidth * maskCenterX
-          const maskY = faceCenterY - maskHeight * maskEyeY
+          // Scale mask to be much larger - covers full face
+          // Eye distance is roughly 1/3 of face width, mask should cover full face + some padding
+          const maskWidth = eyeDistance * 3.2
+          const maskHeight = maskWidth * 1.1 // Slightly taller than wide
+
+          // Position mask: center horizontally on face, position vertically so eyes align
+          // Dog eyes are roughly 35% down from top of mask
+          const maskEyeYPercent = 0.35
 
           // Draw with rotation for tilted faces
           ctx.save()
@@ -275,8 +268,8 @@ export default function App() {
           ctx.rotate(angle)
           ctx.drawImage(
             mask,
-            -maskWidth * maskCenterX,
-            -maskHeight * maskEyeY,
+            -maskWidth / 2,
+            -maskHeight * maskEyeYPercent,
             maskWidth,
             maskHeight
           )
