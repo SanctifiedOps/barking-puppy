@@ -172,7 +172,10 @@ export default function App() {
   React.useEffect(() => {
     const loadModels = async () => {
       try {
-        await faceapi.nets.tinyFaceDetector.loadFromUri("/models")
+        await Promise.all([
+          faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
+          faceapi.nets.faceLandmark68TinyNet.loadFromUri("/models")
+        ])
         setModelsLoaded(true)
       } catch (err) {
         console.error("Failed to load face detection models:", err)
@@ -195,7 +198,7 @@ export default function App() {
 
       // Use lower score threshold for better detection
       const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 512, scoreThreshold: 0.3 })
-      const detections = await faceapi.detectAllFaces(img, options)
+      const detections = await faceapi.detectAllFaces(img, options).withFaceLandmarks(true)
 
       const canvas = document.createElement("canvas")
       canvas.width = img.width
@@ -204,17 +207,16 @@ export default function App() {
 
       ctx.drawImage(img, 0, 0)
 
+      const mask = new Image()
+      mask.crossOrigin = "anonymous"
+      mask.src = "/mask.png"
+
+      await new Promise((resolve) => {
+        mask.onload = resolve
+      })
+
       // If no faces detected, place mask in center of image
       if (detections.length === 0) {
-        const mask = new Image()
-        mask.crossOrigin = "anonymous"
-        mask.src = "/mask.png"
-
-        await new Promise((resolve) => {
-          mask.onload = resolve
-        })
-
-        // Center the mask on the image
         const maskSize = Math.min(img.width, img.height) * 0.6
         const maskX = (img.width - maskSize) / 2
         const maskY = (img.height - maskSize) / 2.5
@@ -222,22 +224,63 @@ export default function App() {
 
         setPuppifyError("No face detected - mask placed in center. Try a clearer photo for better results!")
       } else {
-        const mask = new Image()
-        mask.crossOrigin = "anonymous"
-        mask.src = "/mask.png"
-
-        await new Promise((resolve) => {
-          mask.onload = resolve
-        })
+        // Mask eye positions (as percentage of mask dimensions)
+        // Adjust these values to match where the dog's eyes are on mask.png
+        const maskLeftEyeX = 0.32  // 32% from left
+        const maskRightEyeX = 0.68 // 68% from left
+        const maskEyeY = 0.38      // 38% from top
 
         detections.forEach((det) => {
-          const { x, y, width, height } = det.box
-          const scale = 1.6
-          const maskWidth = width * scale
-          const maskHeight = height * scale
-          const maskX = x - (maskWidth - width) / 2
-          const maskY = y - (maskHeight - height) / 2.5
-          ctx.drawImage(mask, maskX, maskY, maskWidth, maskHeight)
+          const landmarks = det.landmarks
+          const leftEye = landmarks.getLeftEye()
+          const rightEye = landmarks.getRightEye()
+
+          // Calculate center of each eye
+          const leftEyeCenter = {
+            x: leftEye.reduce((sum, p) => sum + p.x, 0) / leftEye.length,
+            y: leftEye.reduce((sum, p) => sum + p.y, 0) / leftEye.length
+          }
+          const rightEyeCenter = {
+            x: rightEye.reduce((sum, p) => sum + p.x, 0) / rightEye.length,
+            y: rightEye.reduce((sum, p) => sum + p.y, 0) / rightEye.length
+          }
+
+          // Calculate distance between eyes and angle
+          const eyeDistance = Math.sqrt(
+            Math.pow(rightEyeCenter.x - leftEyeCenter.x, 2) +
+            Math.pow(rightEyeCenter.y - leftEyeCenter.y, 2)
+          )
+          const angle = Math.atan2(
+            rightEyeCenter.y - leftEyeCenter.y,
+            rightEyeCenter.x - leftEyeCenter.x
+          )
+
+          // Calculate mask size based on eye distance
+          const maskEyeSpan = maskRightEyeX - maskLeftEyeX
+          const maskWidth = eyeDistance / maskEyeSpan
+          const maskHeight = maskWidth // Assuming square-ish mask
+
+          // Calculate where to place the mask so eyes align
+          const faceCenterX = (leftEyeCenter.x + rightEyeCenter.x) / 2
+          const faceCenterY = (leftEyeCenter.y + rightEyeCenter.y) / 2
+
+          // Position mask so its eye center aligns with face eye center
+          const maskCenterX = (maskLeftEyeX + maskRightEyeX) / 2
+          const maskX = faceCenterX - maskWidth * maskCenterX
+          const maskY = faceCenterY - maskHeight * maskEyeY
+
+          // Draw with rotation for tilted faces
+          ctx.save()
+          ctx.translate(faceCenterX, faceCenterY)
+          ctx.rotate(angle)
+          ctx.drawImage(
+            mask,
+            -maskWidth * maskCenterX,
+            -maskHeight * maskEyeY,
+            maskWidth,
+            maskHeight
+          )
+          ctx.restore()
         })
       }
 
