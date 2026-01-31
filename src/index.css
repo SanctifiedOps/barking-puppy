@@ -1918,4 +1918,86 @@ main > section {
   }
 }
 
+/* Puppify Section */
+.puppify-section {
+  text-align: center;
+}
+
+.puppify-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.puppify-upload {
+  width: 100%;
+  max-width: 400px;
+}
+
+.puppify-file-input {
+  display: none;
+}
+
+.puppify-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 32px;
+  border: 2px dashed var(--gold);
+  border-radius: 16px;
+  background: rgba(212, 160, 74, 0.08);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.puppify-upload-label:hover {
+  background: rgba(212, 160, 74, 0.15);
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.puppify-upload-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.puppify-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.puppify-preview {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  border: 2px solid var(--gold);
+}
+
+.puppify-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .puppify-upload-label {
+    padding: 36px 24px;
+  }
+
+  .puppify-preview {
+    max-width: 100%;
+  }
+}
 

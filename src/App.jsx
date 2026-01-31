@@ -1,4 +1,5 @@
 ﻿import React from "react"
+import * as faceapi from "face-api.js"
 
 const contractAddress = "3B1ijcocM5EDga6XxQ7JLW7weocQPWWjuhBYG8Vepump"
 const ticker = "$BP"
@@ -159,6 +160,79 @@ export default function App() {
     holders: null,
     updatedAt: null
   })
+
+  // Puppify state
+  const [puppifyImage, setPuppifyImage] = React.useState(null)
+  const [puppifyResult, setPuppifyResult] = React.useState(null)
+  const [puppifyLoading, setPuppifyLoading] = React.useState(false)
+  const [modelsLoaded, setModelsLoaded] = React.useState(false)
+  const puppifyCanvasRef = React.useRef(null)
+
+  React.useEffect(() => {
+    const loadModels = async () => {
+      try {
+        await faceapi.nets.tinyFaceDetector.loadFromUri("/models")
+        setModelsLoaded(true)
+      } catch (err) {
+        console.error("Failed to load face detection models:", err)
+      }
+    }
+    loadModels()
+  }, [])
+
+  const handlePuppifyUpload = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file || !modelsLoaded) return
+
+    setPuppifyLoading(true)
+    setPuppifyResult(null)
+
+    try {
+      const img = await faceapi.bufferToImage(file)
+      setPuppifyImage(URL.createObjectURL(file))
+
+      const detections = await faceapi.detectAllFaces(img, new faceapi.TinyFaceDetectorOptions())
+
+      const canvas = document.createElement("canvas")
+      canvas.width = img.width
+      canvas.height = img.height
+      const ctx = canvas.getContext("2d")
+
+      ctx.drawImage(img, 0, 0)
+
+      const mask = new Image()
+      mask.crossOrigin = "anonymous"
+      mask.src = "/mask.png"
+
+      await new Promise((resolve) => {
+        mask.onload = resolve
+      })
+
+      detections.forEach((det) => {
+        const { x, y, width, height } = det.box
+        const scale = 1.6
+        const maskWidth = width * scale
+        const maskHeight = height * scale
+        const maskX = x - (maskWidth - width) / 2
+        const maskY = y - (maskHeight - height) / 2.5
+        ctx.drawImage(mask, maskX, maskY, maskWidth, maskHeight)
+      })
+
+      setPuppifyResult(canvas.toDataURL("image/png"))
+    } catch (err) {
+      console.error("Puppify error:", err)
+    } finally {
+      setPuppifyLoading(false)
+    }
+  }
+
+  const downloadPuppifyResult = () => {
+    if (!puppifyResult) return
+    const link = document.createElement("a")
+    link.download = "puppified-pfp.png"
+    link.href = puppifyResult
+    link.click()
+  }
 
   React.useEffect(() => {
     const targets = document.querySelectorAll("[data-animate]")
@@ -411,6 +485,9 @@ export default function App() {
             <a href="#buy" onClick={() => setMenuOpen(false)}>
               Buy
             </a>
+            <a href="#puppify" onClick={() => setMenuOpen(false)}>
+              Puppify
+            </a>
             <a href="#media" onClick={() => setMenuOpen(false)}>
               Media
             </a>
@@ -543,6 +620,57 @@ export default function App() {
                 <p className="mission-body">{pillar.body}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="puppify-section animate" id="puppify" data-animate>
+          <div className="section-tag">Puppify</div>
+          <h2>Puppify Your PFP</h2>
+          <p className="section-lede">
+            Upload your photo and join the pack. Our AI will detect faces and add the Barking Puppy mask.
+          </p>
+          <div className="puppify-container">
+            <div className="puppify-upload">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePuppifyUpload}
+                id="puppify-input"
+                className="puppify-file-input"
+                disabled={!modelsLoaded || puppifyLoading}
+              />
+              <label htmlFor="puppify-input" className="puppify-upload-label">
+                {!modelsLoaded ? (
+                  "Loading AI..."
+                ) : puppifyLoading ? (
+                  "Puppifying..."
+                ) : (
+                  <>
+                    <span className="puppify-upload-icon">+</span>
+                    <span>Upload your photo</span>
+                  </>
+                )}
+              </label>
+            </div>
+            {puppifyResult && (
+              <div className="puppify-result">
+                <img src={puppifyResult} alt="Puppified result" className="puppify-preview" />
+                <div className="puppify-actions">
+                  <button className="button primary" onClick={downloadPuppifyResult}>
+                    Download PFP
+                  </button>
+                  <button
+                    className="button ghost"
+                    onClick={() => {
+                      setPuppifyResult(null)
+                      setPuppifyImage(null)
+                    }}
+                  >
+                    Try Another
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
