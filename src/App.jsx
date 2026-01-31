@@ -255,12 +255,12 @@ export default function App() {
 
           // Scale mask to be much larger - covers full face
           // Eye distance is roughly 1/3 of face width, mask should cover full face + some padding
-          const maskWidth = eyeDistance * 3.2
-          const maskHeight = maskWidth * 1.1 // Slightly taller than wide
+          const maskWidth = eyeDistance * 2.8
+          const maskHeight = maskWidth // Square mask
 
           // Position mask: center horizontally on face, position vertically so eyes align
-          // Dog eyes are roughly 35% down from top of mask
-          const maskEyeYPercent = 0.35
+          // Dog eyes are roughly 50% down from top of mask - this moves mask UP
+          const maskEyeYPercent = 0.50
 
           // Draw with rotation for tilted faces
           ctx.save()
