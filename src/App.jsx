@@ -260,8 +260,9 @@ export default function App() {
           const maskWidth = eyeDistance * 2.5
           const maskHeight = maskWidth / maskAspectRatio
 
-          // Dog eyes are at approximately 38% from top of mask
-          const maskEyeYPercent = 0.38
+          // Position mask so dog eye holes align with human eyes
+          // Higher value = mask moves UP
+          const maskEyeYPercent = 0.55
 
           // Draw with rotation for tilted faces
           ctx.save()
