@@ -552,9 +552,6 @@ export default function App() {
             <a href="#buy" onClick={() => setMenuOpen(false)}>
               Buy
             </a>
-            <a href="#puppify" onClick={() => setMenuOpen(false)}>
-              Puppify
-            </a>
             <a href="#media" onClick={() => setMenuOpen(false)}>
               Media
             </a>
@@ -687,59 +684,6 @@ export default function App() {
                 <p className="mission-body">{pillar.body}</p>
               </div>
             ))}
-          </div>
-        </section>
-
-        <section className="puppify-section animate" id="puppify" data-animate>
-          <div className="section-tag">Puppify</div>
-          <h2>Puppify Your PFP</h2>
-          <p className="section-lede">
-            Upload your photo and join the pack. Our AI will detect faces and add the Barking Puppy mask.
-          </p>
-          <div className="puppify-container">
-            <div className="puppify-upload">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handlePuppifyUpload}
-                id="puppify-input"
-                className="puppify-file-input"
-                disabled={!modelsLoaded || puppifyLoading}
-              />
-              <label htmlFor="puppify-input" className="puppify-upload-label">
-                {!modelsLoaded ? (
-                  "Loading AI..."
-                ) : puppifyLoading ? (
-                  "Puppifying..."
-                ) : (
-                  <>
-                    <span className="puppify-upload-icon">+</span>
-                    <span>Upload your photo</span>
-                  </>
-                )}
-              </label>
-            </div>
-            {puppifyResult && (
-              <div className="puppify-result">
-                {puppifyError && <p className="puppify-notice">{puppifyError}</p>}
-                <img src={puppifyResult} alt="Puppified result" className="puppify-preview" />
-                <div className="puppify-actions">
-                  <button className="button primary" onClick={downloadPuppifyResult}>
-                    Download PFP
-                  </button>
-                  <button
-                    className="button ghost"
-                    onClick={() => {
-                      setPuppifyResult(null)
-                      setPuppifyImage(null)
-                      setPuppifyError(null)
-                    }}
-                  >
-                    Try Another
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </section>
 
