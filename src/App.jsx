@@ -166,6 +166,7 @@ export default function App() {
   const [puppifyResult, setPuppifyResult] = React.useState(null)
   const [puppifyLoading, setPuppifyLoading] = React.useState(false)
   const [modelsLoaded, setModelsLoaded] = React.useState(false)
+  const [puppifyError, setPuppifyError] = React.useState(null)
   const puppifyCanvasRef = React.useRef(null)
 
   React.useEffect(() => {
@@ -186,12 +187,15 @@ export default function App() {
 
     setPuppifyLoading(true)
     setPuppifyResult(null)
+    setPuppifyError(null)
 
     try {
       const img = await faceapi.bufferToImage(file)
       setPuppifyImage(URL.createObjectURL(file))
 
-      const detections = await faceapi.detectAllFaces(img, new faceapi.TinyFaceDetectorOptions())
+      // Use lower score threshold for better detection
+      const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 512, scoreThreshold: 0.3 })
+      const detections = await faceapi.detectAllFaces(img, options)
 
       const canvas = document.createElement("canvas")
       canvas.width = img.width
@@ -200,27 +204,47 @@ export default function App() {
 
       ctx.drawImage(img, 0, 0)
 
-      const mask = new Image()
-      mask.crossOrigin = "anonymous"
-      mask.src = "/mask.png"
+      // If no faces detected, place mask in center of image
+      if (detections.length === 0) {
+        const mask = new Image()
+        mask.crossOrigin = "anonymous"
+        mask.src = "/mask.png"
 
-      await new Promise((resolve) => {
-        mask.onload = resolve
-      })
+        await new Promise((resolve) => {
+          mask.onload = resolve
+        })
 
-      detections.forEach((det) => {
-        const { x, y, width, height } = det.box
-        const scale = 1.6
-        const maskWidth = width * scale
-        const maskHeight = height * scale
-        const maskX = x - (maskWidth - width) / 2
-        const maskY = y - (maskHeight - height) / 2.5
-        ctx.drawImage(mask, maskX, maskY, maskWidth, maskHeight)
-      })
+        // Center the mask on the image
+        const maskSize = Math.min(img.width, img.height) * 0.6
+        const maskX = (img.width - maskSize) / 2
+        const maskY = (img.height - maskSize) / 2.5
+        ctx.drawImage(mask, maskX, maskY, maskSize, maskSize)
+
+        setPuppifyError("No face detected - mask placed in center. Try a clearer photo for better results!")
+      } else {
+        const mask = new Image()
+        mask.crossOrigin = "anonymous"
+        mask.src = "/mask.png"
+
+        await new Promise((resolve) => {
+          mask.onload = resolve
+        })
+
+        detections.forEach((det) => {
+          const { x, y, width, height } = det.box
+          const scale = 1.6
+          const maskWidth = width * scale
+          const maskHeight = height * scale
+          const maskX = x - (maskWidth - width) / 2
+          const maskY = y - (maskHeight - height) / 2.5
+          ctx.drawImage(mask, maskX, maskY, maskWidth, maskHeight)
+        })
+      }
 
       setPuppifyResult(canvas.toDataURL("image/png"))
     } catch (err) {
       console.error("Puppify error:", err)
+      setPuppifyError("Something went wrong. Please try again.")
     } finally {
       setPuppifyLoading(false)
     }
@@ -654,6 +678,7 @@ export default function App() {
             </div>
             {puppifyResult && (
               <div className="puppify-result">
+                {puppifyError && <p className="puppify-notice">{puppifyError}</p>}
                 <img src={puppifyResult} alt="Puppified result" className="puppify-preview" />
                 <div className="puppify-actions">
                   <button className="button primary" onClick={downloadPuppifyResult}>
@@ -664,6 +689,7 @@ export default function App() {
                     onClick={() => {
                       setPuppifyResult(null)
                       setPuppifyImage(null)
+                      setPuppifyError(null)
                     }}
                   >
                     Try Another

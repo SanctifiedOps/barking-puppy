@@ -1991,6 +1991,17 @@ main > section {
   justify-content: center;
 }
 
+.puppify-notice {
+  background: rgba(212, 160, 74, 0.15);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--gold);
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+}
+
 @media (max-width: 640px) {
   .puppify-upload-label {
     padding: 36px 24px;
