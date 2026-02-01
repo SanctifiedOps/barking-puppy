@@ -15,17 +15,22 @@ const aboutCopy = {
       lead: "Token First",
       text:
         ticker +
-        " was minted before any public X account existed. No hype. No marketing. No socials. Just a contract on-chain. That alone separates it from 99% of meme launches."
+        " was minted before any public X account existed. No hype. No marketing. No socials. Just a contract on-chain. That alone separates it from 99% of meme launches. Sound familiar? Actions before words. Proof before promises."
     },
     {
       lead: "The Connection",
       text:
-        "Hours later, the official X appeared. Then Instagram (kevinlegend14). Both linked. Same visuals. Same theme. Same narrative. Coin → identity → socials. Not the other way around."
+        "Hours later, the official X appeared. Then Instagram—kevinlegend14. Kevin. Legend. The brother of the man who moved $40 billion with a single post. Keith Gill. Roaring Kitty. The same family. The same playbook. Coin → identity → socials. Not the other way around."
+    },
+    {
+      lead: "The Potential",
+      text:
+        "If this is real—if the Gill family is behind " + ticker + "—you're not just early on a meme coin. You're early on the next chapter of the biggest retail movement in financial history. GameStop was just the beginning."
     },
     {
       lead: "Survivor",
       text:
-        "99% of coins would have died already if they went through what " + ticker + " went through. This one didn't. You're watching the origin story of a meme brand forming in real time."
+        "99% of coins would have died already if they went through what " + ticker + " went through. This one didn't. The community held. The dev kept building. You're watching a legend form in real time."
     }
   ]
 }
@@ -120,25 +125,31 @@ const loreTimeline = [
     phase: "Jan 17, 2026",
     title: "The Silent Mint",
     body:
-      "A token appears on-chain. No announcement. No socials. No hype. Just a contract address sitting there, waiting to be discovered. Token first."
+      "A token appears on-chain. No announcement. No socials. No hype. Just a contract address sitting there, waiting to be discovered. Token first. Actions before words. The Roaring Kitty playbook."
   },
   {
     phase: "3h 56m Later",
     title: "The Account Emerges",
     body:
-      "An X account surfaces. Same visuals. Same energy. The timing is deliberate. Someone is building something. The question: who?"
+      "An X account surfaces. Same visuals. Same energy. The timing is deliberate. Someone is building something—someone who knows how to move markets without saying a word."
   },
   {
-    phase: "The Connections",
+    phase: "The Brother",
+    title: "KevinLegend14",
+    body:
+      "Kevin Gill. Keith's brother. The Instagram handle appears. The connections stack up. This isn't random. This is methodical. This is how legends are built—in plain sight, for those paying attention."
+  },
+  {
+    phase: "The Potential",
     title: "What If It's Him?",
     body:
-      "KevinLegend14 on Instagram. The brother angle. The GameStop parallels. Coincidence? Maybe. But the confirmations keep rolling in. We're watching closely."
+      "Keith Gill turned GameStop into a $40B+ phenomenon with memes and conviction. If his brother is behind " + ticker + "—if this family is building again—you're not late. You're impossibly early."
   },
   {
     phase: "Right Now",
-    title: "You're Early",
+    title: "The Confirmations Keep Rolling In",
     body:
-      "This is the part of the story where people look back and say 'I wish I was there.' The lore is still being written. The legend is still forming."
+      "Every day, new connections surface. The community digs. The evidence mounts. The question isn't whether to believe—it's whether you'll wait for mainstream confirmation or trust your own research."
   }
 ]
 
